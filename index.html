@@ -4,52 +4,68 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Prajituri de casa</title>
+
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #fafafa;
     }
+
     header {
       background: #111;
       color: white;
       padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      position: relative;
+      text-align: center;
     }
+
     header h1 {
       margin: 0;
       font-size: 20px;
     }
+
+    .social {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
     .social a {
       color: white;
       margin-left: 10px;
       text-decoration: none;
       font-size: 14px;
     }
+
     .container {
       padding: 20px;
     }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
     }
+
     .card {
       background: white;
       border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
+
     .card img {
       width: 100%;
       height: 180px;
       object-fit: cover;
     }
+
     .card-content {
       padding: 15px;
     }
+
     .card button {
       margin-top: 10px;
       padding: 8px;
@@ -60,6 +76,7 @@
       border-radius: 8px;
       cursor: pointer;
     }
+
     .cart {
       position: fixed;
       right: 0;
@@ -71,27 +88,33 @@
       padding: 15px;
       overflow-y: auto;
     }
+
     .cart h2 {
       margin-top: 0;
     }
+
     .item {
       margin-bottom: 10px;
       border-bottom: 1px solid #eee;
       padding-bottom: 10px;
     }
+
     .qty {
       display: flex;
       align-items: center;
       gap: 10px;
     }
+
     .qty button {
       padding: 5px 10px;
     }
+
     .checkout input {
       width: 100%;
       margin-bottom: 10px;
       padding: 8px;
     }
+
     .whatsapp-btn {
       background: green;
       color: white;
@@ -100,18 +123,42 @@
       cursor: pointer;
       border-radius: 8px;
     }
+
     .gallery {
       margin-top: 40px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 10px;
     }
+
     .gallery img {
       width: 100%;
       border-radius: 10px;
     }
+
+    .footer {
+      background-color: #000;
+      padding: 20px;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .facebook {
+      color: #1877F2;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+    }
+
+    .instagram {
+      color: #f09433;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+    }
   </style>
 </head>
+
 <body>
 
 <header>
@@ -153,10 +200,17 @@
   </div>
 </div>
 
+<footer class="footer">
+  <div class="social">
+    <a href="https://www.facebook.com/Valentin0894" target="_blank" class="facebook">Facebook</a>
+    <a href="http://instagram.com/valentinboboc94/" target="_blank" class="instagram">Instagram</a>
+  </div>
+</footer>
+
 <script>
 const products = [
   {name:"Tort ciocolata", price:120, img:"https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg"},
-  {name:"Cheesecake", price:100, img:"https://media.istockphoto.com/id/2152360017/ro/fotografie/cheesecake-c%C4%83p%C8%99uni.jpg?s=2048x2048&w=is&k=20&c=L7qiXYP3VK5QrBYfdi7aYM84Z0yA1WyU7DSEzGHuggs="},
+  {name:"Cheesecake", price:100, img:"https://media.istockphoto.com/id/2152360017/ro/fotografie/cheesecake-c%C4%83p%C8%99uni.jpg"},
   {name:"Amandina", price:90, img:"https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg"},
   {name:"Ecler", price:70, img:"https://i.pinimg.com/736x/61/84/2b/61842b9b77c0b03ee364aa95482b369d.jpg"},
   {name:"Tiramisu", price:110, img:"https://i.pinimg.com/webp/736x/0e/c2/89/0ec289492947872976c5c52215280faa.webp"},
@@ -237,47 +291,9 @@ function sendWhatsApp() {
 
 function sendEmail(e) {
   e.preventDefault();
-  alert("Email trimis (demo). Poti conecta backend real pentru trimitere email.");
+  alert("Email trimis (demo).");
 }
 </script>
 
 </body>
-  
-<html>
-<head>
-  <style>
-    .footer {
-      background-color: #000;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .facebook {
-      color: #1877F2;
-      text-decoration: none;
-      margin: 0 10px;
-      font-weight: bold;
-    }
-
-    .instagram {
-      color: #f09433;
-      text-decoration: none;
-      margin: 0 10px;
-      font-weight: bold;
-    }
-  </style>
-</head>
-
-<body>
-
-<footer class="footer">
-  <div class="social">
-    <a href="https://www.facebook.com/Valentin0894" target="_blank" class="facebook">Facebook</a>
-    <a href="http://instagram.com/valentinboboc94/" target="_blank" class="instagram">Instagram</a>
-  </div>
-</footer>
-
-</body>
-  
 </html>
-
