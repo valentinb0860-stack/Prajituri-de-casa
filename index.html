@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prajituri de casa</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fafafa;
+    }
+    header {
+      background: #111;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+    .social a {
+      color: white;
+      margin-left: 10px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .container {
+      padding: 20px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 15px;
+    }
+    .card button {
+      margin-top: 10px;
+      padding: 8px;
+      width: 100%;
+      border: none;
+      background: black;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .cart {
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 300px;
+      height: 100%;
+      background: white;
+      box-shadow: -3px 0 10px rgba(0,0,0,0.2);
+      padding: 15px;
+      overflow-y: auto;
+    }
+    .cart h2 {
+      margin-top: 0;
+    }
+    .item {
+      margin-bottom: 10px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    .qty {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .qty button {
+      padding: 5px 10px;
+    }
+    .checkout input {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+    }
+    .whatsapp-btn {
+      background: green;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+    .gallery {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Prajituri de casa</h1>
+  <div class="social">
+    <a href="https://www.facebook.com/Valentin0894" target="_blank">Facebook</a>
+    <a href="http://instagram.com/valentinboboc94/" target="_blank">Instagram</a>
+    <a href="https://www.tiktok.com/@valentinbboboc" target="_blank">TikTok</a>
+  </div>
+</header>
+
+<div class="container">
+  <h2>Produse</h2>
+  <div class="grid" id="products"></div>
+
+  <h2>Galerie</h2>
+  <div class="gallery">
+    <img src="https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg" />
+    <img src="https://media.istockphoto.com/id/2152360017/ro/fotografie/cheesecake-c%C4%83p%C8%99uni.jpg" />
+    <img src="https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg" />
+  </div>
+
+  <h2>Contact</h2>
+  <form onsubmit="sendEmail(event)">
+    <input type="text" id="name" placeholder="Nume" required />
+    <input type="text" id="address" placeholder="Adresa" required />
+    <input type="text" id="time" placeholder="Ora livrare" required />
+    <button type="submit">Trimite comanda pe email</button>
+  </form>
+</div>
+
+<div class="cart">
+  <h2>Cos</h2>
+  <div id="cart"></div>
+  <h3>Total: <span id="total">0</span> RON</h3>
+
+  <div class="whatsapp-btn" onclick="sendWhatsApp()">
+    Trimite comanda pe WhatsApp
+  </div>
+</div>
+
+<script>
+const products = [
+  {name:"Tort ciocolata", price:120, img:"https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg"},
+  {name:"Cheesecake", price:100, img:"https://media.istockphoto.com/id/2152360017/ro/fotografie/cheesecake-c%C4%83p%C8%99uni.jpg?s=2048x2048&w=is&k=20&c=L7qiXYP3VK5QrBYfdi7aYM84Z0yA1WyU7DSEzGHuggs="},
+  {name:"Amandina", price:90, img:"https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg"},
+  {name:"Ecler", price:70, img:"https://i.pinimg.com/736x/61/84/2b/61842b9b77c0b03ee364aa95482b369d.jpg"},
+  {name:"Tiramisu", price:110, img:"https://i.pinimg.com/webp/736x/0e/c2/89/0ec289492947872976c5c52215280faa.webp"},
+  {name:"Prajitura casa", price:80, img:"https://i.pinimg.com/1200x/c6/a7/39/c6a7393f232fa6fb6f29c1693f03c244.jpg"},
+  {name:"Platou prajituri", price:150, img:"https://i.pinimg.com/736x/ba/34/bd/ba34bd6e17da654bb3ca85490d36f5a9.jpg"},
+  {name:"Mini tarte", price:95, img:"https://i.pinimg.com/1200x/08/f0/d9/08f0d9a32a49af54f1098e2743ca33ba.jpg"}
+];
+
+let cart = [];
+
+const productsDiv = document.getElementById("products");
+
+products.forEach((p, index) => {
+  const div = document.createElement("div");
+  div.className = "card";
+  div.innerHTML = `
+    <img src="${p.img}" />
+    <div class="card-content">
+      <h3>${p.name}</h3>
+      <p>${p.price} RON</p>
+      <button onclick="addToCart(${index})">Adauga</button>
+    </div>
+  `;
+  productsDiv.appendChild(div);
+});
+
+function addToCart(index) {
+  const item = products[index];
+  const found = cart.find(c => c.name === item.name);
+  if (found) {
+    found.qty++;
+  } else {
+    cart.push({...item, qty:1});
+  }
+  renderCart();
+}
+
+function renderCart() {
+  const cartDiv = document.getElementById("cart");
+  cartDiv.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item, i) => {
+    total += item.price * item.qty;
+    const div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = `
+      <b>${item.name}</b>
+      <div class="qty">
+        <button onclick="changeQty(${i},-1)">-</button>
+        ${item.qty}
+        <button onclick="changeQty(${i},1)">+</button>
+      </div>
+      <div>${item.price * item.qty} RON</div>
+    `;
+    cartDiv.appendChild(div);
+  });
+
+  document.getElementById("total").innerText = total;
+}
+
+function changeQty(i, val) {
+  cart[i].qty += val;
+  if(cart[i].qty <= 0) cart.splice(i,1);
+  renderCart();
+}
+
+function sendWhatsApp() {
+  let message = "Comanda:%0A";
+  cart.forEach(item => {
+    message += `${item.name} x${item.qty} - ${item.price * item.qty} RON%0A`;
+  });
+  message += "Total: " + document.getElementById("total").innerText;
+
+  const url = "https://wa.me/40769926725?text=" + message;
+  window.open(url, "_blank");
+}
+
+function sendEmail(e) {
+  e.preventDefault();
+  alert("Email trimis (demo). Poti conecta backend real pentru trimitere email.");
+}
+</script>
+
+</body>
+</html>
