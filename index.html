@@ -1,364 +1,293 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prajituri de casa</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Prajituri de casa</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: "Segoe UI", sans-serif;
-    }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
+body{background:#f4f6f9}
 
-    body {
-      background: #f4f6f9;
-      color: #333;
-    }
+/* HEADER */
+header{
+  background:#111;color:#fff;
+  padding:15px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+}
+header h1{text-align:center;}
+.social{position:absolute;right:20px;}
+.social a{color:#fff;margin-left:10px;text-decoration:none}
 
-    /* HEADER */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: #111;
-      color: white;
-      padding: 15px 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
+/* TEXT PROMO */
+.hero{
+  text-align:center;
+  padding:30px;
+}
+.hero h2{font-size:28px;margin-bottom:10px;}
+.hero p{color:#555}
 
-    header h1 {
-      font-size: 22px;
-      text-align: center;
-    }
+/* LAYOUT */
+.container{
+  display:grid;
+  grid-template-columns:1fr 320px;
+  gap:20px;
+  padding:20px;
+}
 
-    .social {
-      position: absolute;
-      right: 30px;
-    }
+/* PRODUSE */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+.card{
+  background:#fff;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 6px 18px rgba(0,0,0,0.1);
+  transition:0.3s;
+  position:relative;
+}
+.card:hover{transform:translateY(-5px);}
+.badge{
+  position:absolute;
+  top:10px;left:10px;
+  background:red;color:#fff;
+  padding:5px 10px;
+  border-radius:8px;
+  font-size:12px;
+}
+.card img{width:100%;height:180px;object-fit:cover;}
+.card-content{padding:15px;}
+.card button{
+  width:100%;
+  padding:10px;
+  border:none;
+  background:#111;color:#fff;
+  border-radius:8px;
+  cursor:pointer;
+}
 
-    .social a {
-      color: white;
-      margin-left: 12px;
-      text-decoration: none;
-      font-size: 14px;
-      opacity: 0.8;
-    }
+/* CART */
+.cart{
+  background:#fff;
+  padding:15px;
+  border-radius:15px;
+}
+.whatsapp-btn{
+  margin-top:15px;
+  background:#25D366;
+  color:#fff;
+  padding:10px;
+  text-align:center;
+  border-radius:8px;
+  cursor:pointer;
+}
 
-    .social a:hover {
-      opacity: 1;
-    }
+/* SLIDER */
+.slider{
+  margin-top:40px;
+  overflow:hidden;
+  border-radius:15px;
+}
+.slides{
+  display:flex;
+  transition:0.5s;
+}
+.slides img{
+  width:100%;
+  flex-shrink:0;
+}
 
-    /* LAYOUT */
-    .container {
-      display: grid;
-      grid-template-columns: 1fr 320px;
-      gap: 20px;
-      padding: 20px;
-    }
+/* RECENZII */
+.reviews{
+  margin-top:40px;
+  padding:20px;
+}
+.review{
+  background:#fff;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:10px;
+}
 
-    /* PRODUSE */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
+/* POPUP */
+#popup{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.6);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+.popup-box{
+  background:#fff;
+  padding:20px;
+  border-radius:10px;
+}
 
-    .card {
-      background: white;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-      transition: 0.2s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .card-content {
-      padding: 15px;
-    }
-
-    .price {
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .card button {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      background: #111;
-      color: white;
-      cursor: pointer;
-    }
-
-    /* CART */
-    .cart {
-      position: sticky;
-      top: 80px;
-      background: white;
-      border-radius: 15px;
-      padding: 15px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    }
-
-    .item {
-      border-bottom: 1px solid #eee;
-      padding: 10px 0;
-    }
-
-    .qty {
-      display: flex;
-      gap: 8px;
-      margin: 5px 0;
-    }
-
-    .qty button {
-      padding: 4px 10px;
-      border: none;
-      background: #ddd;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .total {
-      margin-top: 15px;
-      font-weight: bold;
-    }
-
-    .whatsapp-btn {
-      margin-top: 15px;
-      background: #25D366;
-      color: white;
-      padding: 12px;
-      text-align: center;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    /* GALLERY */
-    .gallery {
-      margin-top: 40px;
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 10px;
-    }
-
-    .gallery img {
-      width: 100%;
-      border-radius: 10px;
-      transition: 0.2s;
-    }
-
-    .gallery img:hover {
-      transform: scale(1.05);
-    }
-
-    /* POPUP */
-    #popup {
-      position: fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      background: rgba(0,0,0,0.6);
-      display:none;
-      justify-content:center;
-      align-items:center;
-      z-index:2000;
-    }
-
-    .popup-box {
-      background:white;
-      padding:20px;
-      border-radius:12px;
-      width:300px;
-    }
-
-    .popup-box input {
-      width:100%;
-      margin:10px 0;
-      padding:8px;
-    }
-
-    @media(max-width: 900px) {
-      .container {
-        grid-template-columns: 1fr;
-      }
-
-      .cart {
-        position: relative;
-      }
-    }
-  </style>
+/* RESPONSIVE */
+@media(max-width:900px){
+  .container{grid-template-columns:1fr;}
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>Prajituri de casa</h1>
-  <div class="social">
-    <a href="https://www.facebook.com/Valentin0894" target="_blank">Facebook</a>
-    <a href="http://instagram.com/valentinboboc94/" target="_blank">Instagram</a>
-    <a href="https://www.tiktok.com/@valentinbboboc" target="_blank">TikTok</a>
-  </div>
+<h1>Prajituri de casa</h1>
+<div class="social">
+<a href="#">Facebook</a>
+<a href="#">Instagram</a>
+</div>
 </header>
+
+<div class="hero">
+<h2>🍰 Gust autentic, ca la mama acasă</h2>
+<p>Comandă rapid deserturi delicioase pentru orice ocazie!</p>
+</div>
 
 <div class="container">
 
-  <div class="products-section">
-    <h2>Produse</h2>
-    <div class="grid" id="products"></div>
+<div>
+<div class="grid" id="products"></div>
 
-    <!-- GALERIE -->
-    <div class="gallery">
-      <h2>Galerie</h2>
-      <div class="gallery-grid">
-        <img src="https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg">
-        <img src="https://media.istockphoto.com/id/2152360017/ro/fotografie/cheesecake-c%C4%83p%C8%99uni.jpg">
-        <img src="https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg">
-      </div>
-    </div>
-  </div>
+<!-- SLIDER GALERIE -->
+<div class="slider">
+<div class="slides" id="slides">
+<img src="https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg">
+<img src="https://media.istockphoto.com/id/2152360017/ro/fotografie/cheesecake-c%C4%83p%C8%99uni.jpg">
+<img src="https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg">
 
-  <div class="cart">
-    <h2>Coș comenzi</h2>
-    <div id="cart"></div>
-    <div class="total">Total: <span id="total">0</span> RON</div>
+<!-- POZE NOI -->
+<img src="https://i.pinimg.com/736x/61/84/2b/61842b9b77c0b03ee364aa95482b369d.jpg">
+<img src="https://i.pinimg.com/736x/4d/8b/2a/4d8b2a5d1d6bfb4bfa5f7d89b0fbc1c5.jpg">
+<img src="https://i.pinimg.com/736x/0e/c2/89/0ec289492947872976c5c52215280faa.webp">
+<img src="https://i.pinimg.com/736x/5f/3a/2b/5f3a2b8c7c6a4e4b6d6a8b9c2e4d2a3c.jpg">
+</div>
+</div>
 
-    <div class="whatsapp-btn" onclick="openPopup()">
-      Trimite pe WhatsApp
-    </div>
-  </div>
+<!-- RECENZII -->
+<div class="reviews">
+<h2>⭐ Recenzii clienți</h2>
+
+<div class="review">„Cele mai bune prăjituri! Recomand!” – Maria</div>
+<div class="review">„Livrare rapidă și gust excelent!” – Andrei</div>
+<div class="review">„Am comandat de 3 ori deja!” – Elena</div>
+
+</div>
+
+</div>
+
+<div class="cart">
+<h2>Coș</h2>
+<div id="cart"></div>
+<div>Total: <span id="total">0</span> RON</div>
+<div class="whatsapp-btn" onclick="openPopup()">Comandă</div>
+</div>
 
 </div>
 
 <!-- POPUP -->
 <div id="popup">
-  <div class="popup-box">
-    <h3>Detalii livrare</h3>
-    <input id="address" type="text" placeholder="Adresa livrare">
-    <input id="time" type="time">
-    <button onclick="confirmOrder()">Confirmă</button>
-  </div>
+<div class="popup-box">
+<h3>Livrare</h3>
+<input id="address" placeholder="Adresa"><br><br>
+<input id="time" type="time"><br><br>
+<button onclick="confirmOrder()">Trimite</button>
+</div>
 </div>
 
 <script>
-const products = [
-  {name:"Tort ciocolata", price:120, img:"https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg"},
-  {name:"Cheesecake", price:100, img:"https://media.istockphoto.com/id/2152360017/ro/fotografie/cheesecake-c%C4%83p%C8%99uni.jpg"},
-  {name:"Amandina", price:90, img:"https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg"},
-  {name:"Ecler", price:70, img:"https://i.pinimg.com/736x/61/84/2b/61842b9b77c0b03ee364aa95482b369d.jpg"},
-  {name:"Tiramisu", price:110, img:"https://i.pinimg.com/webp/736x/0e/c2/89/0ec289492947872976c5c52215280faa.webp"}
+const products=[
+{name:"Tort ciocolata",price:120,img:"https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg",badge:"Cel mai vândut"},
+{name:"Cheesecake",price:100,img:"https://media.istockphoto.com/id/2152360017/ro/fotografie/cheesecake-c%C4%83p%C8%99uni.jpg",badge:"Ofertă azi"},
+{name:"Amandina",price:90,img:"https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg"},
+{name:"Ecler",price:70,img:"https://i.pinimg.com/736x/61/84/2b/61842b9b77c0b03ee364aa95482b369d.jpg"},
+{name:"Tiramisu",price:110,img:"https://i.pinimg.com/webp/736x/0e/c2/89/0ec289492947872976c5c52215280faa.webp"}
 ];
 
-let cart = [];
+let cart=[];
 
-const productsDiv = document.getElementById("products");
-
-products.forEach((p, index) => {
-  const div = document.createElement("div");
-  div.className = "card";
-  div.innerHTML = `
-    <img src="${p.img}" />
-    <div class="card-content">
-      <h3>${p.name}</h3>
-      <div class="price">${p.price} RON</div>
-      <button onclick="addToCart(${index})">Adaugă în coș</button>
-    </div>
-  `;
-  productsDiv.appendChild(div);
+products.forEach((p,i)=>{
+const div=document.createElement("div");
+div.className="card";
+div.innerHTML=`
+${p.badge?`<div class="badge">${p.badge}</div>`:""}
+<img src="${p.img}">
+<div class="card-content">
+<h3>${p.name}</h3>
+<p>${p.price} RON</p>
+<button onclick="addToCart(${i})">Adaugă</button>
+</div>`;
+products.appendChild;
+document.getElementById("products").appendChild(div);
 });
 
-function addToCart(index) {
-  const item = products[index];
-  const found = cart.find(c => c.name === item.name);
-
-  if (found) found.qty++;
-  else cart.push({...item, qty:1});
-
-  renderCart();
+function addToCart(i){
+let item=products[i];
+let found=cart.find(x=>x.name===item.name);
+if(found)found.qty++;
+else cart.push({...item,qty:1});
+renderCart();
 }
 
-function renderCart() {
-  const cartDiv = document.getElementById("cart");
-  cartDiv.innerHTML = "";
-  let total = 0;
-
-  cart.forEach((item, i) => {
-    total += item.price * item.qty;
-
-    const div = document.createElement("div");
-    div.className = "item";
-    div.innerHTML = `
-      <b>${item.name}</b>
-      <div class="qty">
-        <button onclick="changeQty(${i},-1)">-</button>
-        ${item.qty}
-        <button onclick="changeQty(${i},1)">+</button>
-      </div>
-      <div>${item.price * item.qty} RON</div>
-    `;
-    cartDiv.appendChild(div);
-  });
-
-  document.getElementById("total").innerText = total;
+function renderCart(){
+let html="";let total=0;
+cart.forEach((i,index)=>{
+total+=i.price*i.qty;
+html+=`${i.name} x${i.qty} <br>`;
+});
+document.getElementById("cart").innerHTML=html;
+document.getElementById("total").innerText=total;
 }
 
-function changeQty(i, val) {
-  cart[i].qty += val;
-  if(cart[i].qty <= 0) cart.splice(i,1);
-  renderCart();
+/* POPUP */
+function openPopup(){
+if(cart.length===0){alert("Coș gol");return;}
+document.getElementById("popup").style.display="flex";
 }
 
-function openPopup() {
-  if(cart.length === 0){
-    alert("Coșul este gol!");
-    return;
-  }
-  document.getElementById("popup").style.display = "flex";
+function confirmOrder(){
+let addr=document.getElementById("address").value;
+let time=document.getElementById("time").value;
+
+let msg="Comanda:%0A";
+cart.forEach(i=>{
+msg+=`${i.name} x${i.qty}%0A`;
+});
+msg+=`Adresa:${addr}%0AOra:${time}`;
+
+window.open("https://wa.me/40769926725?text="+msg);
 }
 
-function confirmOrder() {
-  const address = document.getElementById("address").value;
-  const time = document.getElementById("time").value;
+/* SLIDER AUTO + SWIPE */
+let index=0;
+const slides=document.getElementById("slides");
 
-  if(!address || !time){
-    alert("Completează adresa și ora!");
-    return;
-  }
+setInterval(()=>{
+index++;
+if(index>=slides.children.length)index=0;
+slides.style.transform=`translateX(-${index*100}%)`;
+},3000);
 
-  let message = "Comanda:%0A";
-
-  cart.forEach(item => {
-    message += `${item.name} x${item.qty} - ${item.price * item.qty} RON%0A`;
-  });
-
-  message += `Adresa: ${address}%0A`;
-  message += `Ora livrare: ${time}%0A`;
-  message += "Total: " + document.getElementById("total").innerText;
-
-  window.open("https://wa.me/40769926725?text=" + message, "_blank");
-
-  document.getElementById("popup").style.display = "none";
-}
+/* SWIPE */
+let startX=0;
+slides.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
+slides.addEventListener("touchend",e=>{
+let endX=e.changedTouches[0].clientX;
+if(startX-endX>50) index++;
+if(endX-startX>50) index--;
+if(index<0) index=0;
+if(index>=slides.children.length) index=slides.children.length-1;
+slides.style.transform=`translateX(-${index*100}%)`;
+});
 </script>
 
 </body>
