@@ -6,61 +6,140 @@
 <title>Prajituri de casa</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
-body{background:#f4f6f9}
+:root{
+ --primary:#111;
+ --accent:#25D366;
+ --danger:#e74c3c;
+ --bg:#f4f6f9;
+}
+
+*{
+ margin:0;
+ padding:0;
+ box-sizing:border-box;
+ font-family:Arial, sans-serif;
+}
+
+body{
+ background:var(--bg);
+ color:#333;
+}
 
 /* HEADER */
 header{
- background:#111;
+ background:var(--primary);
  color:#fff;
- padding:15px;
+ padding:18px;
  text-align:center;
-}
-
-/* HERO */
-.hero{
- text-align:center;
- padding:25px;
-}
-.hero h2{font-size:26px;margin-bottom:10px;}
-.hero p{color:#555}
-.hero .cta{
- margin-top:10px;
+ font-size:20px;
  font-weight:bold;
- color:#111;
 }
 
 /* PROMO */
 .promo{
- background:#111;
+ background:#000;
  color:#fff;
  text-align:center;
  padding:10px;
  font-size:14px;
 }
 
+/* HERO */
+.hero{
+ text-align:center;
+ padding:30px 15px;
+ max-width:900px;
+ margin:auto;
+}
+.hero h2{
+ font-size:28px;
+ margin-bottom:10px;
+}
+.hero p{
+ color:#666;
+}
+
+/* CONTAINER */
+.container{
+ max-width:1100px;
+ margin:auto;
+ padding:20px;
+}
+
 /* GRID */
-.container{padding:20px;}
 .grid{
  display:grid;
- grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
  gap:20px;
 }
 
 /* CARD */
 .card{
  background:#fff;
- border-radius:12px;
+ border-radius:14px;
  overflow:hidden;
- position:relative;
- box-shadow:0 4px 15px rgba(0,0,0,0.1);
+ box-shadow:0 6px 18px rgba(0,0,0,0.08);
+ transition:0.3s;
+ display:flex;
+ flex-direction:column;
 }
+
+.card:hover{
+ transform:translateY(-5px);
+}
+
 .card img{
  width:100%;
  height:180px;
  object-fit:cover;
 }
-.card-content{padding:10px;}
+
+.card-content{
+ padding:12px;
+ display:flex;
+ flex-direction:column;
+ gap:8px;
+}
+
+.card h3{
+ font-size:18px;
+}
+
+.price{
+ font-weight:bold;
+ color:#111;
+}
+
+.tag{
+ font-size:12px;
+ color:#e67e22;
+}
+
+/* SELECT */
+select{
+ padding:8px;
+ border-radius:8px;
+ border:1px solid #ddd;
+ outline:none;
+}
+
+/* BUTTON */
+button{
+ padding:10px;
+ border:none;
+ border-radius:8px;
+ cursor:pointer;
+ background:var(--primary);
+ color:#fff;
+ font-weight:bold;
+ transition:0.2s;
+}
+
+button:hover{
+ opacity:0.85;
+}
+
+/* BADGE */
 .badge{
  position:absolute;
  top:10px;
@@ -69,30 +148,12 @@ header{
  color:#fff;
  padding:5px 8px;
  font-size:12px;
- border-radius:5px;
-}
-.card .tag{
- font-size:12px;
- color:#e67e22;
- margin:5px 0;
-}
-.card select{
- width:100%;
- padding:8px;
- margin:5px 0;
-}
-.card button{
- width:100%;
- padding:10px;
- border:none;
- background:#111;
- color:#fff;
- cursor:pointer;
+ border-radius:6px;
 }
 
 /* SLIDER */
 .slider{
- margin:30px 0;
+ margin:40px 0;
  overflow:hidden;
  border-radius:12px;
 }
@@ -100,15 +161,20 @@ header{
  display:flex;
  transition:0.5s;
 }
-.slides img{width:100%;}
+.slides img{
+ width:100%;
+}
 
 /* REVIEWS */
-.reviews{margin-top:30px;}
+.reviews{
+ margin-top:40px;
+}
 .review{
  background:#fff;
  padding:12px;
  margin-bottom:10px;
  border-radius:10px;
+ box-shadow:0 3px 10px rgba(0,0,0,0.05);
 }
 
 /* CART */
@@ -117,7 +183,9 @@ header{
  bottom:0;
  background:#fff;
  padding:15px;
+ border-top:2px solid #eee;
 }
+
 .item{
  display:flex;
  justify-content:space-between;
@@ -125,33 +193,37 @@ header{
  border-bottom:1px solid #eee;
 }
 
-/* BUTTONS */
+/* ACTIONS */
 .actions{
  display:flex;
  gap:10px;
  margin-top:10px;
 }
-.btn{
- flex:1;
- padding:10px;
- border:none;
- color:#fff;
- cursor:pointer;
+
+.buy{
+ background:var(--accent);
 }
-.buy{background:#25D366;}
-.cancel{background:#e74c3c;}
+
+.cancel{
+ background:var(--danger);
+}
 
 /* CHECKOUT */
 .checkout{
+ max-width:600px;
+ margin:20px auto;
  background:#fff;
- padding:15px;
- margin-top:20px;
- border-radius:10px;
+ padding:20px;
+ border-radius:12px;
+ box-shadow:0 6px 18px rgba(0,0,0,0.08);
 }
+
 .checkout input{
  width:100%;
- margin:5px 0;
- padding:8px;
+ margin:6px 0;
+ padding:10px;
+ border-radius:8px;
+ border:1px solid #ddd;
 }
 
 /* FOOTER */
@@ -159,17 +231,19 @@ footer{
  background:#000;
  color:#fff;
  text-align:center;
- padding:20px;
+ padding:25px;
  margin-top:40px;
 }
 
+/* TOAST */
 .toast{
  position:fixed;
  top:20px;
  right:20px;
  background:#111;
  color:#fff;
- padding:10px;
+ padding:10px 15px;
+ border-radius:8px;
  display:none;
 }
 </style>
@@ -177,50 +251,36 @@ footer{
 
 <body>
 
-<header>
-<h1>Prajituri de casa</h1>
-</header>
+<header>Prajituri de casă 🍰</header>
 
 <div class="promo">
-🔥 Reduceri limitate azi | Comandă acum și primești livrare rapidă
+🔥 Reduceri limitate azi | Comandă rapid prin WhatsApp
 </div>
 
 <div class="hero">
-<h2>🍰 Deserturi proaspete, făcute zilnic</h2>
-<p class="cta">Comandă online în câteva secunde • Gust autentic de casă</p>
-<p>✔ Ingrediente naturale & calitate premium</p>
+<h2>Deserturi proaspete, făcute zilnic</h2>
+<p>Ingrediente naturale • Gust autentic • Livrare rapidă</p>
 </div>
 
 <div class="container">
+
 <div class="grid" id="products"></div>
 
 <!-- SLIDER -->
 <div class="slider">
 <div class="slides" id="slides">
 <img src="https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg">
-
-  
 <img src="https://i.pinimg.com/736x/9f/f7/51/9ff7519385d770103d8b4bf6c53c7a37.jpg">
-
-  
 <img src="https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg">
-
-  
-<img src="https://i.pinimg.com/736x/36/8f/bd/368fbde717331b559db8af6df7aef957.jpg">
-
-  
-<img src="https://i.pinimg.com/736x/ad/14/a2/ad14a286c8e61dc38c96e0500f6a93de.jpg">
-
-  
 </div>
 </div>
 
 <!-- REVIEWS -->
 <div class="reviews">
-<h3>⭐ Recenzii clienți</h3>
-<div class="review">„Cele mai bune prăjituri din zonă!” – Maria</div>
-<div class="review">„Livrare rapidă și produse fresh.” – Andrei</div>
-<div class="review">„Recomand cu încredere!” – Elena</div>
+<h3>⭐ Recenzii</h3>
+<div class="review">„Cele mai bune prăjituri!” – Maria</div>
+<div class="review">„Livrare rapidă.” – Andrei</div>
+<div class="review">„Recomand!” – Elena</div>
 </div>
 
 </div>
@@ -229,18 +289,19 @@ footer{
 <div class="cart">
 <h3>Coș</h3>
 <div id="cart"></div>
+
 <div class="actions">
-<button class="btn buy" onclick="openCheckout()">Comandă acum</button>
-<button class="btn cancel" onclick="clearCart()">Anulează</button>
+<button class="buy" onclick="openCheckout()">Comandă</button>
+<button class="cancel" onclick="clearCart()">Anulează</button>
 </div>
 </div>
 
 <!-- CHECKOUT -->
 <div class="checkout" id="checkout" style="display:none;">
 <h3>Finalizează comanda</h3>
-<input id="name" placeholder="Nume complet">
+<input id="name" placeholder="Nume">
 <input id="phone" placeholder="Telefon">
-<input id="address" placeholder="Adresă livrare">
+<input id="address" placeholder="Adresă">
 <input id="time" type="time">
 <button onclick="confirmOrder()">Trimite comanda</button>
 </div>
@@ -248,17 +309,15 @@ footer{
 <div class="toast" id="toast"></div>
 
 <footer>
-<p>© 2026 Prajituri de casa</p>
-<p>📱 Facebook | Instagram</p>
+© 2026 Prajituri de casa
 </footer>
 
 <script>
-const products = [
+const products=[
 {
  name:"Tort ciocolata",
  img:"https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg",
  badge:"Best Seller",
- tag:"⭐ Cel mai vândut",
  variants:[
   {name:"Mic", price:100},
   {name:"Mediu", price:120},
@@ -273,63 +332,51 @@ const products = [
   {name:"Mediu", price:100},
   {name:"Mare", price:130}
  ]
-},
-{
- name:"Amandina",
- img:"https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg",
- variants:[
-  {name:"Standard", price:90}
- ]
 }
 ];
 
-let cart = [];
+let cart=[];
 
-const productsDiv = document.getElementById("products");
+const productsDiv=document.getElementById("products");
 
 products.forEach((p,i)=>{
- const div = document.createElement("div");
+ const div=document.createElement("div");
  div.className="card";
 
- let variantOptions = p.variants.map((v,idx)=>
+ let options=p.variants.map((v,idx)=>
   `<option value="${idx}">${v.name} - ${v.price} RON</option>`
  ).join("");
 
- div.innerHTML = `
- ${p.badge ? `<div class="badge">${p.badge}</div>` : ''}
+ div.innerHTML=`
+ ${p.badge?`<div class="badge">${p.badge}</div>`:''}
  <img src="${p.img}">
  <div class="card-content">
   <h3>${p.name}</h3>
-  <p class="tag">${p.tag || ''}</p>
 
   <select id="variant-${i}">
-   ${variantOptions}
+   ${options}
   </select>
 
   <button onclick="addToCart(${i})">Adaugă în coș</button>
  </div>
  `;
+
  productsDiv.appendChild(div);
 });
 
 function addToCart(i){
- let product = products[i];
- let variantSelect = document.getElementById(`variant-${i}`);
- let variantIndex = variantSelect.value;
- let variant = product.variants[variantIndex];
+ let product=products[i];
+ let select=document.getElementById(`variant-${i}`);
+ let variant=product.variants[select.value];
 
- let itemName = product.name + " (" + variant.name + ")";
+ let name=`${product.name} (${variant.name})`;
 
- let found = cart.find(x => x.name === itemName);
+ let found=cart.find(x=>x.name===name);
 
  if(found){
   found.qty++;
- } else {
-  cart.push({
-   name: itemName,
-   price: variant.price,
-   qty:1
-  });
+ }else{
+  cart.push({name,price:variant.price,qty:1});
  }
 
  renderCart();
@@ -339,14 +386,13 @@ function addToCart(i){
 function renderCart(){
  let html="";
  cart.forEach(i=>{
-  html += `
+  html+=`
   <div class="item">
    <span>${i.name} x${i.qty}</span>
-   <span>${i.price * i.qty} RON</span>
-  </div>
-  `;
+   <span>${i.price*i.qty} RON</span>
+  </div>`;
  });
- document.getElementById("cart").innerHTML = html;
+ document.getElementById("cart").innerHTML=html;
 }
 
 function clearCart(){
