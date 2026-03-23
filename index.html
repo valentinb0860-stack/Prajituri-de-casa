@@ -145,7 +145,6 @@ header{
  background:#111;
 }
 
-/* rest unchanged */
 .reviews{margin-top:30px;}
 .review{
  background:#fff;
@@ -298,21 +297,70 @@ footer{
 </footer>
 
 <script>
+/* PRODUCTS WITH VARIANTS */
 const products = [
-{name:"Tort ciocolata",price:120,img:"https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg",badge:"Best Seller",tag:"⭐ Cel mai vândut"},
-{name:"Cheesecake",price:100,img:"https://i.pinimg.com/webp/1200x/1e/92/70/1e92708d4c30a0c225cd6e2a8d6aac8b.webp",tag:"🔥 Ofertă limitată"},
-{name:"Amandina",price:90,img:"https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg"},
-{name:"Ecler",price:70,img:"https://i.pinimg.com/736x/61/84/2b/61842b9b77c0b03ee364aa95482b369d.jpg"},
-{name:"Tiramisu",price:110,img:"https://i.pinimg.com/webp/736x/0e/c2/89/0ec289492947872976c5c52215280faa.webp"}
+{
+ name:"Tort ciocolata",
+ img:"https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg",
+ badge:"Best Seller",
+ tag:"⭐ Cel mai vândut",
+ variants:[
+  {name:"Mic", price:100},
+  {name:"Mediu", price:120},
+  {name:"Mare", price:150}
+ ]
+},
+{
+ name:"Cheesecake",
+ img:"https://i.pinimg.com/webp/1200x/1e/92/70/1e92708d4c30a0c225cd6e2a8d6aac8b.webp",
+ tag:"🔥 Ofertă limitată",
+ variants:[
+  {name:"Mic", price:80},
+  {name:"Mediu", price:100},
+  {name:"Mare", price:130}
+ ]
+},
+{
+ name:"Amandina",
+ img:"https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg",
+ variants:[
+  {name:"Mic", price:70},
+  {name:"Mediu", price:90},
+  {name:"Mare", price:110}
+ ]
+},
+{
+ name:"Ecler",
+ img:"https://i.pinimg.com/736x/61/84/2b/61842b9b77c0b03ee364aa95482b369d.jpg",
+ variants:[
+  {name:"Mic", price:50},
+  {name:"Mediu", price:70},
+  {name:"Mare", price:90}
+ ]
+},
+{
+ name:"Tiramisu",
+ img:"https://i.pinimg.com/webp/736x/0e/c2/89/0ec289492947872976c5c52215280faa.webp",
+ variants:[
+  {name:"Mic", price:90},
+  {name:"Mediu", price:110},
+  {name:"Mare", price:140}
+ ]
+}
 ];
 
 let cart = [];
 
 const productsDiv = document.getElementById("products");
 
+/* RENDER PRODUCTS */
 products.forEach((p,i)=>{
  const div = document.createElement("div");
  div.className="card";
+
+ let options = p.variants.map((v,idx)=>
+  `<option value="${idx}">${v.name} - ${v.price} RON</option>`
+ ).join("");
 
  div.innerHTML = `
  ${p.badge ? `<div class="badge">${p.badge}</div>` : ''}
@@ -320,23 +368,33 @@ products.forEach((p,i)=>{
  <div class="card-content">
   <h3>${p.name}</h3>
   <p class="tag">${p.tag || ''}</p>
-  <p><strong>${p.price} RON</strong></p>
+
+  <select id="variant-${i}">
+   ${options}
+  </select>
+
   <button onclick="addToCart(${i})">Adaugă în coș</button>
  </div>
  `;
  productsDiv.appendChild(div);
 });
 
+/* ADD TO CART WITH VARIANT */
 function addToCart(i){
  let product = products[i];
- let found = cart.find(x => x.name === product.name);
+ let variantIndex = document.getElementById(`variant-${i}`).value;
+ let variant = product.variants[variantIndex];
+
+ let itemName = product.name + " (" + variant.name + ")";
+
+ let found = cart.find(x => x.name === itemName);
 
  if(found){
   found.qty++;
  } else {
   cart.push({
-   name: product.name,
-   price: product.price,
+   name: itemName,
+   price: variant.price,
    qty:1
   });
  }
@@ -404,7 +462,6 @@ function confirmOrder(){
 
  msg+=`Nume:${name}%0ATelefon:${phone}%0AAdresa:${address}%0AOra:${time}`;
 
- // FIX: redirect direct + encoding corect
  window.location.href = "https://wa.me/40769926725?text=" + encodeURIComponent(msg);
 }
 
@@ -415,13 +472,12 @@ function showToast(msg){
  setTimeout(()=>t.style.display="none",2000);
 }
 
-/* SLIDER LOGIC */
+/* SLIDER */
 let index = 0;
 const slides = document.getElementById("slides");
 const totalSlides = slides.children.length;
 const dotsContainer = document.getElementById("dots");
 
-// create dots
 for(let i=0;i<totalSlides;i++){
  let dot = document.createElement("span");
  dot.classList.add("dot");
@@ -451,12 +507,7 @@ function prevSlide(){
  goToSlide(index);
 }
 
-// auto slide
-setInterval(()=>{
- nextSlide();
-}, 4000);
-
-// init dots
+setInterval(nextSlide, 4000);
 updateDots();
 </script>
 
