@@ -107,6 +107,7 @@ header{
 .slide{
  min-width:100%;
  position:relative;
+ cursor:pointer;
 }
 
 .slides img{
@@ -159,6 +160,35 @@ header{
 }
 
 .dot.active{background:#111;}
+
+/* LIGHTBOX */
+.lightbox{
+ display:none;
+ position:fixed;
+ top:0;
+ left:0;
+ width:100%;
+ height:100%;
+ background:rgba(0,0,0,0.8);
+ justify-content:center;
+ align-items:center;
+ z-index:999;
+}
+
+.lightbox img{
+ max-width:90%;
+ max-height:80%;
+ border-radius:10px;
+}
+
+.lightbox span{
+ position:absolute;
+ top:20px;
+ right:30px;
+ color:#fff;
+ font-size:30px;
+ cursor:pointer;
+}
 
 .cart{
  position:sticky;
@@ -261,22 +291,22 @@ footer{
 
 <div class="slides" id="slides">
 
-<div class="slide">
+<div class="slide" onclick="openLightbox('https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg')">
 <img src="https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg">
 <div class="slide-caption">🔥 Ofertă specială: Torturi premium la comandă</div>
 </div>
 
-<div class="slide">
+<div class="slide" onclick="openLightbox('https://i.pinimg.com/736x/9f/f7/51/9ff7519385d770103d8b4bf6c53c7a37.jpg')">
 <img src="https://i.pinimg.com/736x/9f/f7/51/9ff7519385d770103d8b4bf6c53c7a37.jpg">
 <div class="slide-caption">🍰 Deserturi fresh preparate zilnic</div>
 </div>
 
-<div class="slide">
+<div class="slide" onclick="openLightbox('https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg')">
 <img src="https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg">
 <div class="slide-caption">⭐ Cele mai comandate prăjituri</div>
 </div>
 
-<div class="slide">
+<div class="slide" onclick="openLightbox('https://i.pinimg.com/736x/36/8f/bd/368fbde717331b559db8af6df7aef957.jpg')">
 <img src="https://i.pinimg.com/736x/36/8f/bd/368fbde717331b559db8af6df7aef957.jpg">
 <div class="slide-caption">🚚 Livrare rapidă în aceeași zi</div>
 </div>
@@ -286,6 +316,12 @@ footer{
 <div class="dots" id="dots"></div>
 </div>
 
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+ <span>&times;</span>
+ <img id="lightbox-img" src="">
 </div>
 
 <div class="cart">
@@ -320,9 +356,8 @@ const products = [
 {name:"Amandina",img:"https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg",variants:{Mic:60,Mediu:90,Mare:120}},
 {name:"Ecler",img:"https://i.pinimg.com/736x/61/84/2b/61842b9b77c0b03ee364aa95482b369d.jpg",variants:{Mic:50,Mediu:70,Mare:95}},
 {name:"Tiramisu",img:"https://i.pinimg.com/webp/736x/0e/c2/89/0ec289492947872976c5c52215280faa.webp",variants:{Mic:65,Mediu:95,Mare:130}},
-{name:"Pavlova",img:"https://i.pinimg.com/736x/6b/7c/3c/6b7c3c2c0b7a1b9b8f3f0c2a5f1e9b4c.jpg",variants:{Mic:75,Mediu:105,Mare:145}},
-{name:"Brownie",img:"https://i.pinimg.com/736x/3a/9f/2d/3a9f2d7c9f6a8c5d2e4b1a6f3c9d7e2a.jpg",variants:{Mic:55,Mediu:85,Mare:115}},
-{name:"Red Velvet",img:"https://i.pinimg.com/736x/9c/5a/1f/9c5a1f2c8a7d6b4e3f2a1c9d8b7a6e5d.jpg",variants:{Mic:80,Mediu:115,Mare:155}}
+{name:"Pavlova",img:"https://i.pinimg.com/736x/3c/32/c0/3c32c043d8e895ebc95cff683b22f196.jpg",variants:{Mic:75,Mediu:105,Mare:145}},
+{name:"Brownie",img:"https://i.pinimg.com/736x/a1/b3/85/a1b385e4ffd662993a2cbb5e91cdf297.jpg",variants:{Mic:55,Mediu:85,Mare:115}},
 ];
 
 let cart = [];
@@ -411,6 +446,16 @@ function confirmOrder(){
 }
 
 function showToast(msg){let t=document.getElementById("toast");t.innerText=msg;t.style.display="block";setTimeout(()=>t.style.display="none",2000);}
+
+/* LIGHTBOX */
+function openLightbox(src){
+ document.getElementById("lightbox").style.display="flex";
+ document.getElementById("lightbox-img").src=src;
+}
+
+function closeLightbox(){
+ document.getElementById("lightbox").style.display="none";
+}
 
 /* SLIDER */
 let index=0;
