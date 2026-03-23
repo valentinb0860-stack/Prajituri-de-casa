@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Prajituri de casa</title>
 
 <style>
@@ -11,167 +11,176 @@ body{background:#f4f6f9}
 
 /* HEADER */
 header{
-  background:#111;color:#fff;
+  background:#111;
+  color:#fff;
   padding:15px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  position:relative;
+  text-align:center;
 }
-header h1{text-align:center;}
-.social{position:absolute;right:20px;}
-.social a{color:#fff;margin-left:10px;text-decoration:none}
 
 /* HERO */
-.hero{text-align:center;padding:30px;}
-.hero h2{font-size:28px;margin-bottom:10px;}
+.hero{
+  text-align:center;
+  padding:25px;
+}
+.hero h2{font-size:26px;margin-bottom:10px;}
 .hero p{color:#555}
-
-/* LAYOUT */
-.container{
-  display:grid;
-  grid-template-columns:1fr 320px;
-  gap:20px;
-  padding:20px;
+.hero .cta{
+  margin-top:10px;
+  font-weight:bold;
+  color:#111;
 }
 
-/* PRODUSE */
+/* PROMO BANNER */
+.promo{
+  background:#111;
+  color:#fff;
+  text-align:center;
+  padding:10px;
+  font-size:14px;
+}
+
+/* GRID */
+.container{padding:20px;}
+
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:20px;
 }
+
+/* CARD */
 .card{
   background:#fff;
-  border-radius:15px;
+  border-radius:12px;
   overflow:hidden;
-  box-shadow:0 6px 18px rgba(0,0,0,0.1);
   position:relative;
+  box-shadow:0 4px 15px rgba(0,0,0,0.1);
 }
-.card img{width:100%;height:180px;object-fit:cover;}
-.card-content{padding:15px;}
+
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+
+.card-content{padding:10px;}
+
+.badge{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:red;
+  color:#fff;
+  padding:5px 8px;
+  font-size:12px;
+  border-radius:5px;
+}
+
+.card .tag{
+  font-size:12px;
+  color:#e67e22;
+  margin:5px 0;
+}
+
 .card button{
   width:100%;
   padding:10px;
   border:none;
-  background:#111;color:#fff;
-  border-radius:8px;
-  cursor:pointer;
-}
-.badge{
-  position:absolute;
-  top:10px;left:10px;
-  background:red;color:#fff;
-  padding:5px 10px;
-  border-radius:6px;
-  font-size:12px;
-}
-
-/* CART */
-.cart{
-  background:#fff;
-  padding:15px;
-  border-radius:15px;
-}
-.item{
-  border-bottom:1px solid #eee;
-  padding:10px 0;
-  position:relative;
-}
-.remove-btn{
-  position:absolute;
-  right:0;
-  top:10px;
-  background:red;
+  background:#111;
   color:#fff;
-  border:none;
-  border-radius:5px;
-  padding:2px 6px;
-  cursor:pointer;
-}
-.qty{
-  display:flex;
-  gap:8px;
-  margin:5px 0;
-}
-.qty button{
-  padding:4px 10px;
-  border:none;
-  background:#ddd;
-  border-radius:5px;
-  cursor:pointer;
-}
-.total{margin-top:15px;font-weight:bold;}
-
-.whatsapp-btn{
-  margin-top:10px;
-  background:#25D366;
-  color:#fff;
-  padding:10px;
-  text-align:center;
-  border-radius:8px;
-  cursor:pointer;
-}
-
-/* CANCEL BTN */
-.cancel-btn{
-  margin-top:10px;
-  background:#e74c3c;
-  color:#fff;
-  padding:10px;
-  text-align:center;
-  border-radius:8px;
   cursor:pointer;
 }
 
 /* SLIDER */
 .slider{
-  margin-top:40px;
+  margin:30px 0;
   overflow:hidden;
-  border-radius:15px;
+  border-radius:12px;
 }
 .slides{
   display:flex;
   transition:0.5s;
 }
-.slides img{
-  width:100%;
-  flex-shrink:0;
-}
+.slides img{width:100%;}
 
 /* REVIEWS */
-.reviews{margin-top:40px;padding:20px;}
+.reviews{
+  margin-top:30px;
+}
 .review{
   background:#fff;
-  padding:15px;
-  border-radius:10px;
+  padding:12px;
   margin-bottom:10px;
+  border-radius:10px;
 }
 
-/* POPUP */
-#popup{
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  background:rgba(0,0,0,0.6);
-  display:none;
-  justify-content:center;
-  align-items:center;
-}
-.popup-box{
+/* CART */
+.cart{
+  position:sticky;
+  bottom:0;
   background:#fff;
-  padding:20px;
+  padding:15px;
+}
+
+.item{
+  display:flex;
+  justify-content:space-between;
+  padding:6px 0;
+  border-bottom:1px solid #eee;
+}
+
+/* BUTTONS */
+.actions{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+}
+
+.btn{
+  flex:1;
+  padding:10px;
+  border:none;
+  color:#fff;
+  cursor:pointer;
+}
+
+.buy{background:#25D366;}
+.cancel{background:#e74c3c;}
+
+/* CHECKOUT */
+.checkout{
+  background:#fff;
+  padding:15px;
+  margin-top:20px;
   border-radius:10px;
 }
-.popup-box input{
+.checkout input{
   width:100%;
-  margin:10px 0;
+  margin:5px 0;
   padding:8px;
 }
 
-/* RESPONSIVE */
-@media(max-width:900px){
-  .container{grid-template-columns:1fr;}
+/* FOOTER */
+footer{
+  background:#000;
+  color:#fff;
+  text-align:center;
+  padding:20px;
+  margin-top:40px;
+}
+
+footer p{
+  margin-bottom:5px;
+}
+
+.toast{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:#111;
+  color:#fff;
+  padding:10px;
+  display:none;
 }
 </style>
 </head>
@@ -180,20 +189,21 @@ header h1{text-align:center;}
 
 <header>
 <h1>Prajituri de casa</h1>
-<div class="social">
-<a href="#">Facebook</a>
-<a href="#">Instagram</a>
-</div>
 </header>
 
+<!-- PROMO BAR -->
+<div class="promo">
+🔥 Reduceri limitate azi | Comandă acum și primești livrare rapidă
+</div>
+
 <div class="hero">
-<h2>🍰 Deserturi delicioase, livrate rapid</h2>
-<p>Comandă ușor și bucură-te de gust autentic</p>
+<h2>🍰 Deserturi proaspete, făcute zilnic</h2>
+<p class="cta">Comandă online în câteva secunde • Gust autentic de casă</p>
+<p>✔ Ingrediente naturale & calitate premium</p>
 </div>
 
 <div class="container">
 
-<div>
 <div class="grid" id="products"></div>
 
 <!-- SLIDER -->
@@ -207,40 +217,47 @@ header h1{text-align:center;}
 
 <!-- REVIEWS -->
 <div class="reviews">
-<h2>⭐ Recenzii</h2>
-<div class="review">„Foarte bune prăjituri!” – Maria</div>
-<div class="review">„Livrare rapidă” – Andrei</div>
-<div class="review">„Recomand!” – Elena</div>
+<h3>⭐ Recenzii clienți</h3>
+<div class="review">„Cele mai bune prăjituri din zonă!” – Maria</div>
+<div class="review">„Livrare rapidă și produse fresh.” – Andrei</div>
+<div class="review">„Recomand cu încredere!” – Elena</div>
 </div>
 
 </div>
 
+<!-- CART -->
 <div class="cart">
-<h2>Coș</h2>
+<h3>Coș</h3>
 <div id="cart"></div>
 
-<div class="total">Total: <span id="total">0</span> RON</div>
-
-<div class="whatsapp-btn" onclick="openPopup()">Comandă</div>
-<div class="cancel-btn" onclick="clearCart()">Anulează comanda</div>
+<div class="actions">
+<button class="btn buy" onclick="openCheckout()">Comandă acum</button>
+<button class="btn cancel" onclick="clearCart()">Anulează</button>
+</div>
 </div>
 
-</div>
-
-<!-- POPUP -->
-<div id="popup">
-<div class="popup-box">
-<h3>Livrare</h3>
-<input id="address" placeholder="Adresa">
+<!-- CHECKOUT -->
+<div class="checkout" id="checkout" style="display:none;">
+<h3>Finalizează comanda</h3>
+<input id="name" placeholder="Nume complet">
+<input id="phone" placeholder="Telefon">
+<input id="address" placeholder="Adresă livrare">
 <input id="time" type="time">
-<button onclick="confirmOrder()">Trimite</button>
+<button onclick="confirmOrder()">Trimite comanda</button>
 </div>
-</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+<p>© 2026 Prajituri de casa</p>
+<p>Contact rapid & comenzi online disponibile zilnic</p>
+<p>📱 Facebook | Instagram</p>
+</footer>
 
 <script>
 const products=[
-{name:"Tort ciocolata",price:120,img:"https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg",badge:"Cel mai vândut"},
-{name:"Cheesecake",price:100,img:"https://media.istockphoto.com/id/2152360017/ro/fotografie/cheesecake-c%C4%83p%C8%99uni.jpg",badge:"Ofertă azi"},
+{name:"Tort ciocolata",price:120,img:"https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg",badge:"Best Seller",tag:"⭐ Cel mai vândut"},
+{name:"Cheesecake",price:100,img:"https://media.istockphoto.com/id/2152360017/ro/fotografie/cheesecake-c%C4%83p%C8%99uni.jpg",tag:"🔥 Ofertă limitată"},
 {name:"Amandina",price:90,img:"https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg"},
 {name:"Ecler",price:70,img:"https://i.pinimg.com/736x/61/84/2b/61842b9b77c0b03ee364aa95482b369d.jpg"},
 {name:"Tiramisu",price:110,img:"https://i.pinimg.com/webp/736x/0e/c2/89/0ec289492947872976c5c52215280faa.webp"}
@@ -254,12 +271,13 @@ products.forEach((p,i)=>{
 const div=document.createElement("div");
 div.className="card";
 div.innerHTML=`
-${p.badge?`<div class="badge">${p.badge}</div>`:""}
+${p.badge?`<div class="badge">${p.badge}</div>`:''}
 <img src="${p.img}">
 <div class="card-content">
 <h3>${p.name}</h3>
 <p>${p.price} RON</p>
-<button onclick="addToCart(${i})">Adaugă</button>
+<p class="tag">${p.tag||''}</p>
+<button onclick="addToCart(${i})">Adaugă în coș</button>
 </div>`;
 productsDiv.appendChild(div);
 });
@@ -267,43 +285,21 @@ productsDiv.appendChild(div);
 function addToCart(i){
 let item=products[i];
 let found=cart.find(x=>x.name===item.name);
-if(found)found.qty++;
+if(found) found.qty++;
 else cart.push({...item,qty:1});
 renderCart();
+showToast("Adăugat în coș");
 }
 
 function renderCart(){
-let html="";let total=0;
-
-cart.forEach((i,index)=>{
-total+=i.price*i.qty;
-
-html+=`
-<div class="item">
-<b>${i.name}</b>
-<button class="remove-btn" onclick="removeItem(${index})">X</button>
-<div class="qty">
-<button onclick="changeQty(${index},-1)">-</button>
-${i.qty}
-<button onclick="changeQty(${index},1)">+</button>
-</div>
-<div>${i.price*i.qty} RON</div>
+let html="";
+cart.forEach(i=>{
+html+=`<div class="item">
+<span>${i.name} x${i.qty}</span>
+<span>${i.price*i.qty} RON</span>
 </div>`;
 });
-
 document.getElementById("cart").innerHTML=html;
-document.getElementById("total").innerText=total;
-}
-
-function changeQty(i,val){
-cart[i].qty+=val;
-if(cart[i].qty<=0) cart.splice(i,1);
-renderCart();
-}
-
-function removeItem(i){
-cart.splice(i,1);
-renderCart();
 }
 
 function clearCart(){
@@ -311,34 +307,47 @@ cart=[];
 renderCart();
 }
 
-function openPopup(){
-if(cart.length===0){alert("Coș gol");return;}
-document.getElementById("popup").style.display="flex";
+function openCheckout(){
+document.getElementById("checkout").style.display="block";
 }
 
 function confirmOrder(){
-let addr=document.getElementById("address").value;
+let name=document.getElementById("name").value;
+let phone=document.getElementById("phone").value;
+let address=document.getElementById("address").value;
 let time=document.getElementById("time").value;
+
+if(!name||!phone||!address||!time){
+alert("Completează toate câmpurile!");
+return;
+}
 
 let msg="Comanda:%0A";
 cart.forEach(i=>{
 msg+=`${i.name} x${i.qty}%0A`;
 });
-msg+=`Adresa:${addr}%0AOra:${time}`;
+msg+=`Nume:${name}%0ATelefon:${phone}%0AAdresa:${address}%0AOra:${time}`;
 
 window.open("https://wa.me/40769926725?text="+msg);
-document.getElementById("popup").style.display="none";
 }
 
-/* SLIDER AUTO */
+function showToast(msg){
+let t=document.getElementById("toast");
+t.innerText=msg;
+t.style.display="block";
+setTimeout(()=>t.style.display="none",2000);
+}
+
+/* SLIDER */
 let index=0;
 const slides=document.getElementById("slides");
 
 setInterval(()=>{
 index++;
-if(index>=slides.children.length)index=0;
+if(index>=slides.children.length) index=0;
 slides.style.transform=`translateX(-${index*100}%)`;
 },3000);
+
 </script>
 
 </body>
