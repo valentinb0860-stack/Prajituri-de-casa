@@ -95,19 +95,37 @@ header{
  overflow:hidden;
  border-radius:12px;
  position:relative;
+ height:220px;
 }
 
 .slides{
  display:flex;
  transition:transform 0.6s ease;
+ height:100%;
+}
+
+.slide{
+ min-width:100%;
+ position:relative;
 }
 
 .slides img{
  width:100%;
- flex-shrink:0;
+ height:220px;
+ object-fit:cover;
 }
 
-/* buttons */
+.slide-caption{
+ position:absolute;
+ bottom:20px;
+ left:20px;
+ background:rgba(0,0,0,0.6);
+ color:#fff;
+ padding:10px 15px;
+ border-radius:8px;
+ font-size:14px;
+}
+
 .slider-btn{
  position:absolute;
  top:50%;
@@ -123,11 +141,10 @@ header{
 .prev{left:10px;}
 .next{right:10px;}
 
-/* dots */
 .dots{
  text-align:center;
  position:absolute;
- bottom:10px;
+ bottom:5px;
  width:100%;
 }
 
@@ -141,11 +158,8 @@ header{
  cursor:pointer;
 }
 
-.dot.active{
- background:#111;
-}
+.dot.active{background:#111;}
 
-/* CART */
 .cart{
  position:sticky;
  bottom:0;
@@ -246,11 +260,27 @@ footer{
 <button class="slider-btn next" onclick="nextSlide()">❯</button>
 
 <div class="slides" id="slides">
+
+<div class="slide">
 <img src="https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg">
+<div class="slide-caption">🔥 Ofertă specială: Torturi premium la comandă</div>
+</div>
+
+<div class="slide">
 <img src="https://i.pinimg.com/736x/9f/f7/51/9ff7519385d770103d8b4bf6c53c7a37.jpg">
+<div class="slide-caption">🍰 Deserturi fresh preparate zilnic</div>
+</div>
+
+<div class="slide">
 <img src="https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg">
+<div class="slide-caption">⭐ Cele mai comandate prăjituri</div>
+</div>
+
+<div class="slide">
 <img src="https://i.pinimg.com/736x/36/8f/bd/368fbde717331b559db8af6df7aef957.jpg">
-<img src="https://i.pinimg.com/736x/ad/14/a2/ad14a286c8e61dc38c96e0500f6a93de.jpg">
+<div class="slide-caption">🚚 Livrare rapidă în aceeași zi</div>
+</div>
+
 </div>
 
 <div class="dots" id="dots"></div>
@@ -285,33 +315,11 @@ footer{
 
 <script>
 const products = [
-{
- name:"Tort ciocolata",
- img:"https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg",
- variants:{
-  Mic:80,
-  Mediu:120,
-  Mare:160
- }
-},
-{
- name:"Cheesecake",
- img:"https://i.pinimg.com/webp/1200x/1e/92/70/1e92708d4c30a0c225cd6e2a8d6aac8b.webp",
- variants:{
-  Mic:70,
-  Mediu:100,
-  Mare:140
- }
-},
-{
- name:"Amandina",
- img:"https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg",
- variants:{
-  Mic:60,
-  Mediu:90,
-  Mare:120
- }
-}
+{name:"Tort ciocolata",img:"https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg",variants:{Mic:80,Mediu:120,Mare:160}},
+{name:"Cheesecake",img:"https://i.pinimg.com/webp/1200x/1e/92/70/1e92708d4c30a0c225cd6e2a8d6aac8b.webp",variants:{Mic:70,Mediu:100,Mare:140}},
+{name:"Amandina",img:"https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg",variants:{Mic:60,Mediu:90,Mare:120}},
+{name:"Ecler",img:"https://i.pinimg.com/736x/61/84/2b/61842b9b77c0b03ee364aa95482b369d.jpg",variants:{Mic:50,Mediu:70,Mare:95}},
+{name:"Tiramisu",img:"https://i.pinimg.com/webp/736x/0e/c2/89/0ec289492947872976c5c52215280faa.webp",variants:{Mic:65,Mediu:95,Mare:130}}
 ];
 
 let cart = [];
@@ -324,18 +332,16 @@ products.forEach((p,i)=>{
 
  let options = "";
  for(let v in p.variants){
-  options += `<option value="${v}|${p.variants[v]}">${v} - ${p.variants[v]} RON</option>`;
+  options += `<option value=\"${v}|${p.variants[v]}\">${v} - ${p.variants[v]} RON</option>`;
  }
 
  div.innerHTML = `
  <img src="${p.img}">
  <div class="card-content">
   <h3>${p.name}</h3>
-
   <select id="variant-${i}">
    ${options}
   </select>
-
   <button onclick="addToCart(${i})">Adaugă în coș</button>
  </div>
  `;
@@ -347,12 +353,13 @@ function addToCart(i){
  let select = document.getElementById("variant-"+i).value;
  let [variant, price] = select.split("|");
 
- cart.push({
-  name: product.name,
-  variant: variant,
-  price: parseInt(price),
-  qty:1
- });
+ let found = cart.find(x => x.name===product.name && x.variant===variant);
+
+ if(found){
+  found.qty++;
+ } else {
+  cart.push({name:product.name,variant:variant,price:parseInt(price),qty:1});
+ }
 
  renderCart();
  showToast("Adăugat în coș");
@@ -367,13 +374,11 @@ function renderCart(){
     <span>${i.name} (${i.variant})</span><br>
     <small>${i.price} RON</small>
    </div>
-
    <div class="qty-controls">
     <button onclick="changeQty(${index}, -1)">-</button>
     <span>${i.qty}</span>
     <button onclick="changeQty(${index}, 1)">+</button>
    </div>
-
    <span>${i.price * i.qty} RON</span>
   </div>
   `;
@@ -383,86 +388,38 @@ function renderCart(){
 
 function changeQty(index, delta){
  cart[index].qty += delta;
- if(cart[index].qty <= 0){
-  cart.splice(index,1);
- }
+ if(cart[index].qty<=0){cart.splice(index,1);} 
  renderCart();
 }
 
-function clearCart(){
- cart=[];
- renderCart();
-}
+function clearCart(){cart=[];renderCart();}
 
-function openCheckout(){
- document.getElementById("checkout").style.display="block";
-}
+function openCheckout(){document.getElementById("checkout").style.display="block";}
 
 function confirmOrder(){
  let name=document.getElementById("name").value;
  let phone=document.getElementById("phone").value;
  let address=document.getElementById("address").value;
-
- if(!name||!phone||!address){
-  alert("Completează toate câmpurile!");
-  return;
- }
-
+ if(!name||!phone||!address){alert("Completează toate câmpurile!");return;}
  let msg="Comanda:%0A";
-
- cart.forEach(i=>{
-  msg+=`${i.name} (${i.variant}) x${i.qty}%0A`;
- });
-
+ cart.forEach(i=>{msg+=`${i.name} (${i.variant}) x${i.qty}%0A`;});
  msg+=`Nume:${name}%0ATelefon:${phone}%0AAdresa:${address}`;
-
- window.location.href = "https://wa.me/40769926725?text=" + encodeURIComponent(msg);
+ window.location.href="https://wa.me/40769926725?text="+encodeURIComponent(msg);
 }
 
-function showToast(msg){
- let t=document.getElementById("toast");
- t.innerText=msg;
- t.style.display="block";
- setTimeout(()=>t.style.display="none",2000);
-}
+function showToast(msg){let t=document.getElementById("toast");t.innerText=msg;t.style.display="block";setTimeout(()=>t.style.display="none",2000);}
 
 /* SLIDER */
-let index = 0;
-const slides = document.getElementById("slides");
-const totalSlides = slides.children.length;
-const dotsContainer = document.getElementById("dots");
-
-for(let i=0;i<totalSlides;i++){
- let dot = document.createElement("span");
- dot.classList.add("dot");
- dot.onclick = ()=>goToSlide(i);
- dotsContainer.appendChild(dot);
-}
-
-function updateDots(){
- document.querySelectorAll(".dot").forEach((d,i)=>{
-  d.classList.toggle("active", i === index);
- });
-}
-
-function goToSlide(i){
- index = i;
- slides.style.transform = `translateX(-${index*100}%)`;
- updateDots();
-}
-
-function nextSlide(){
- index = (index + 1) % totalSlides;
- goToSlide(index);
-}
-
-function prevSlide(){
- index = (index - 1 + totalSlides) % totalSlides;
- goToSlide(index);
-}
-
-setInterval(nextSlide, 4000);
-updateDots();
+let index=0;
+const slides=document.getElementById("slides");
+const totalSlides=slides.children.length;
+const dotsContainer=document.getElementById("dots");
+for(let i=0;i<totalSlides;i++){let dot=document.createElement("span");dot.classList.add("dot");dot.onclick=()=>goToSlide(i);dotsContainer.appendChild(dot);} 
+function updateDots(){document.querySelectorAll(".dot").forEach((d,i)=>d.classList.toggle("active",i===index));}
+function goToSlide(i){index=i;slides.style.transform=`translateX(-${index*100}%)`;updateDots();}
+function nextSlide(){index=(index+1)%totalSlides;goToSlide(index);} 
+function prevSlide(){index=(index-1+totalSlides)%totalSlides;goToSlide(index);} 
+setInterval(nextSlide,4000);updateDots();
 </script>
 
 </body>
