@@ -22,11 +22,8 @@ header h1{text-align:center;}
 .social{position:absolute;right:20px;}
 .social a{color:#fff;margin-left:10px;text-decoration:none}
 
-/* TEXT PROMO */
-.hero{
-  text-align:center;
-  padding:30px;
-}
+/* HERO */
+.hero{text-align:center;padding:30px;}
 .hero h2{font-size:28px;margin-bottom:10px;}
 .hero p{color:#555}
 
@@ -49,17 +46,7 @@ header h1{text-align:center;}
   border-radius:15px;
   overflow:hidden;
   box-shadow:0 6px 18px rgba(0,0,0,0.1);
-  transition:0.3s;
   position:relative;
-}
-.card:hover{transform:translateY(-5px);}
-.badge{
-  position:absolute;
-  top:10px;left:10px;
-  background:red;color:#fff;
-  padding:5px 10px;
-  border-radius:8px;
-  font-size:12px;
 }
 .card img{width:100%;height:180px;object-fit:cover;}
 .card-content{padding:15px;}
@@ -71,6 +58,14 @@ header h1{text-align:center;}
   border-radius:8px;
   cursor:pointer;
 }
+.badge{
+  position:absolute;
+  top:10px;left:10px;
+  background:red;color:#fff;
+  padding:5px 10px;
+  border-radius:6px;
+  font-size:12px;
+}
 
 /* CART */
 .cart{
@@ -78,9 +73,50 @@ header h1{text-align:center;}
   padding:15px;
   border-radius:15px;
 }
+.item{
+  border-bottom:1px solid #eee;
+  padding:10px 0;
+  position:relative;
+}
+.remove-btn{
+  position:absolute;
+  right:0;
+  top:10px;
+  background:red;
+  color:#fff;
+  border:none;
+  border-radius:5px;
+  padding:2px 6px;
+  cursor:pointer;
+}
+.qty{
+  display:flex;
+  gap:8px;
+  margin:5px 0;
+}
+.qty button{
+  padding:4px 10px;
+  border:none;
+  background:#ddd;
+  border-radius:5px;
+  cursor:pointer;
+}
+.total{margin-top:15px;font-weight:bold;}
+
 .whatsapp-btn{
-  margin-top:15px;
+  margin-top:10px;
   background:#25D366;
+  color:#fff;
+  padding:10px;
+  text-align:center;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* CANCEL BTN */
+.cancel-btn{
+  margin-top:10px;
+  background:#e74c3c;
   color:#fff;
   padding:10px;
   text-align:center;
@@ -103,11 +139,8 @@ header h1{text-align:center;}
   flex-shrink:0;
 }
 
-/* RECENZII */
-.reviews{
-  margin-top:40px;
-  padding:20px;
-}
+/* REVIEWS */
+.reviews{margin-top:40px;padding:20px;}
 .review{
   background:#fff;
   padding:15px;
@@ -130,6 +163,11 @@ header h1{text-align:center;}
   padding:20px;
   border-radius:10px;
 }
+.popup-box input{
+  width:100%;
+  margin:10px 0;
+  padding:8px;
+}
 
 /* RESPONSIVE */
 @media(max-width:900px){
@@ -149,8 +187,8 @@ header h1{text-align:center;}
 </header>
 
 <div class="hero">
-<h2>🍰 Gust autentic, ca la mama acasă</h2>
-<p>Comandă rapid deserturi delicioase pentru orice ocazie!</p>
+<h2>🍰 Deserturi delicioase, livrate rapid</h2>
+<p>Comandă ușor și bucură-te de gust autentic</p>
 </div>
 
 <div class="container">
@@ -158,29 +196,21 @@ header h1{text-align:center;}
 <div>
 <div class="grid" id="products"></div>
 
-<!-- SLIDER GALERIE -->
+<!-- SLIDER -->
 <div class="slider">
 <div class="slides" id="slides">
 <img src="https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg">
 <img src="https://media.istockphoto.com/id/2152360017/ro/fotografie/cheesecake-c%C4%83p%C8%99uni.jpg">
 <img src="https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg">
-
-<!-- POZE NOI -->
-<img src="https://i.pinimg.com/736x/61/84/2b/61842b9b77c0b03ee364aa95482b369d.jpg">
-<img src="https://i.pinimg.com/736x/4d/8b/2a/4d8b2a5d1d6bfb4bfa5f7d89b0fbc1c5.jpg">
-<img src="https://i.pinimg.com/736x/0e/c2/89/0ec289492947872976c5c52215280faa.webp">
-<img src="https://i.pinimg.com/736x/5f/3a/2b/5f3a2b8c7c6a4e4b6d6a8b9c2e4d2a3c.jpg">
 </div>
 </div>
 
-<!-- RECENZII -->
+<!-- REVIEWS -->
 <div class="reviews">
-<h2>⭐ Recenzii clienți</h2>
-
-<div class="review">„Cele mai bune prăjituri! Recomand!” – Maria</div>
-<div class="review">„Livrare rapidă și gust excelent!” – Andrei</div>
-<div class="review">„Am comandat de 3 ori deja!” – Elena</div>
-
+<h2>⭐ Recenzii</h2>
+<div class="review">„Foarte bune prăjituri!” – Maria</div>
+<div class="review">„Livrare rapidă” – Andrei</div>
+<div class="review">„Recomand!” – Elena</div>
 </div>
 
 </div>
@@ -188,8 +218,11 @@ header h1{text-align:center;}
 <div class="cart">
 <h2>Coș</h2>
 <div id="cart"></div>
-<div>Total: <span id="total">0</span> RON</div>
+
+<div class="total">Total: <span id="total">0</span> RON</div>
+
 <div class="whatsapp-btn" onclick="openPopup()">Comandă</div>
+<div class="cancel-btn" onclick="clearCart()">Anulează comanda</div>
 </div>
 
 </div>
@@ -198,8 +231,8 @@ header h1{text-align:center;}
 <div id="popup">
 <div class="popup-box">
 <h3>Livrare</h3>
-<input id="address" placeholder="Adresa"><br><br>
-<input id="time" type="time"><br><br>
+<input id="address" placeholder="Adresa">
+<input id="time" type="time">
 <button onclick="confirmOrder()">Trimite</button>
 </div>
 </div>
@@ -215,6 +248,8 @@ const products=[
 
 let cart=[];
 
+const productsDiv=document.getElementById("products");
+
 products.forEach((p,i)=>{
 const div=document.createElement("div");
 div.className="card";
@@ -226,8 +261,7 @@ ${p.badge?`<div class="badge">${p.badge}</div>`:""}
 <p>${p.price} RON</p>
 <button onclick="addToCart(${i})">Adaugă</button>
 </div>`;
-products.appendChild;
-document.getElementById("products").appendChild(div);
+productsDiv.appendChild(div);
 });
 
 function addToCart(i){
@@ -240,15 +274,43 @@ renderCart();
 
 function renderCart(){
 let html="";let total=0;
+
 cart.forEach((i,index)=>{
 total+=i.price*i.qty;
-html+=`${i.name} x${i.qty} <br>`;
+
+html+=`
+<div class="item">
+<b>${i.name}</b>
+<button class="remove-btn" onclick="removeItem(${index})">X</button>
+<div class="qty">
+<button onclick="changeQty(${index},-1)">-</button>
+${i.qty}
+<button onclick="changeQty(${index},1)">+</button>
+</div>
+<div>${i.price*i.qty} RON</div>
+</div>`;
 });
+
 document.getElementById("cart").innerHTML=html;
 document.getElementById("total").innerText=total;
 }
 
-/* POPUP */
+function changeQty(i,val){
+cart[i].qty+=val;
+if(cart[i].qty<=0) cart.splice(i,1);
+renderCart();
+}
+
+function removeItem(i){
+cart.splice(i,1);
+renderCart();
+}
+
+function clearCart(){
+cart=[];
+renderCart();
+}
+
 function openPopup(){
 if(cart.length===0){alert("Coș gol");return;}
 document.getElementById("popup").style.display="flex";
@@ -265,9 +327,10 @@ msg+=`${i.name} x${i.qty}%0A`;
 msg+=`Adresa:${addr}%0AOra:${time}`;
 
 window.open("https://wa.me/40769926725?text="+msg);
+document.getElementById("popup").style.display="none";
 }
 
-/* SLIDER AUTO + SWIPE */
+/* SLIDER AUTO */
 let index=0;
 const slides=document.getElementById("slides");
 
@@ -276,18 +339,6 @@ index++;
 if(index>=slides.children.length)index=0;
 slides.style.transform=`translateX(-${index*100}%)`;
 },3000);
-
-/* SWIPE */
-let startX=0;
-slides.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
-slides.addEventListener("touchend",e=>{
-let endX=e.changedTouches[0].clientX;
-if(startX-endX>50) index++;
-if(endX-startX>50) index--;
-if(index<0) index=0;
-if(index>=slides.children.length) index=slides.children.length-1;
-slides.style.transform=`translateX(-${index*100}%)`;
-});
 </script>
 
 </body>
