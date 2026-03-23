@@ -145,19 +145,14 @@ header{
  background:#111;
 }
 
-.reviews{margin-top:30px;}
-.review{
- background:#fff;
- padding:12px;
- margin-bottom:10px;
- border-radius:10px;
-}
-
+/* CART */
 .cart{
  position:sticky;
  bottom:0;
  background:#fff;
  padding:15px;
+ border-top:2px solid #eee;
+ box-shadow:0 -2px 10px rgba(0,0,0,0.05);
 }
 
 .item{
@@ -246,7 +241,6 @@ footer{
 <div class="container">
 <div class="grid" id="products"></div>
 
-<!-- SLIDER -->
 <div class="slider">
 <button class="slider-btn prev" onclick="prevSlide()">❮</button>
 <button class="slider-btn next" onclick="nextSlide()">❯</button>
@@ -262,18 +256,12 @@ footer{
 <div class="dots" id="dots"></div>
 </div>
 
-<div class="reviews">
-<h3>⭐ Recenzii clienți</h3>
-<div class="review">„Cele mai bune prăjituri din zonă!” – Maria</div>
-<div class="review">„Livrare rapidă și produse fresh.” – Andrei</div>
-<div class="review">„Recomand cu încredere!” – Elena</div>
-</div>
-
 </div>
 
 <div class="cart">
 <h3>Coș</h3>
 <div id="cart"></div>
+
 <div class="actions">
 <button class="btn buy" onclick="openCheckout()">Comandă acum</button>
 <button class="btn cancel" onclick="clearCart()">Anulează</button>
@@ -285,7 +273,6 @@ footer{
 <input id="name" placeholder="Nume complet">
 <input id="phone" placeholder="Telefon">
 <input id="address" placeholder="Adresă livrare">
-<input id="time" type="time">
 <button onclick="confirmOrder()">Trimite comanda</button>
 </div>
 
@@ -293,59 +280,36 @@ footer{
 
 <footer>
 <p>© 2026 Prajituri de casa</p>
-<p>📱 Facebook | Instagram</p>
 </footer>
 
 <script>
-/* PRODUCTS WITH VARIANTS */
 const products = [
 {
  name:"Tort ciocolata",
  img:"https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg",
- badge:"Best Seller",
- tag:"⭐ Cel mai vândut",
- variants:[
-  {name:"Mic", price:100},
-  {name:"Mediu", price:120},
-  {name:"Mare", price:150}
- ]
+ variants:{
+  Mic:80,
+  Mediu:120,
+  Mare:160
+ }
 },
 {
  name:"Cheesecake",
  img:"https://i.pinimg.com/webp/1200x/1e/92/70/1e92708d4c30a0c225cd6e2a8d6aac8b.webp",
- tag:"🔥 Ofertă limitată",
- variants:[
-  {name:"Mic", price:80},
-  {name:"Mediu", price:100},
-  {name:"Mare", price:130}
- ]
+ variants:{
+  Mic:70,
+  Mediu:100,
+  Mare:140
+ }
 },
 {
  name:"Amandina",
  img:"https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg",
- variants:[
-  {name:"Mic", price:70},
-  {name:"Mediu", price:90},
-  {name:"Mare", price:110}
- ]
-},
-{
- name:"Ecler",
- img:"https://i.pinimg.com/736x/61/84/2b/61842b9b77c0b03ee364aa95482b369d.jpg",
- variants:[
-  {name:"Mic", price:50},
-  {name:"Mediu", price:70},
-  {name:"Mare", price:90}
- ]
-},
-{
- name:"Tiramisu",
- img:"https://i.pinimg.com/webp/736x/0e/c2/89/0ec289492947872976c5c52215280faa.webp",
- variants:[
-  {name:"Mic", price:90},
-  {name:"Mediu", price:110},
-  {name:"Mare", price:140}
- ]
+ variants:{
+  Mic:60,
+  Mediu:90,
+  Mare:120
+ }
 }
 ];
 
@@ -353,21 +317,19 @@ let cart = [];
 
 const productsDiv = document.getElementById("products");
 
-/* RENDER PRODUCTS */
 products.forEach((p,i)=>{
  const div = document.createElement("div");
  div.className="card";
 
- let options = p.variants.map((v,idx)=>
-  `<option value="${idx}">${v.name} - ${v.price} RON</option>`
- ).join("");
+ let options = "";
+ for(let v in p.variants){
+  options += `<option value="${v}|${p.variants[v]}">${v} - ${p.variants[v]} RON</option>`;
+ }
 
  div.innerHTML = `
- ${p.badge ? `<div class="badge">${p.badge}</div>` : ''}
  <img src="${p.img}">
  <div class="card-content">
   <h3>${p.name}</h3>
-  <p class="tag">${p.tag || ''}</p>
 
   <select id="variant-${i}">
    ${options}
@@ -379,25 +341,17 @@ products.forEach((p,i)=>{
  productsDiv.appendChild(div);
 });
 
-/* ADD TO CART WITH VARIANT */
 function addToCart(i){
  let product = products[i];
- let variantIndex = document.getElementById(`variant-${i}`).value;
- let variant = product.variants[variantIndex];
+ let select = document.getElementById("variant-"+i).value;
+ let [variant, price] = select.split("|");
 
- let itemName = product.name + " (" + variant.name + ")";
-
- let found = cart.find(x => x.name === itemName);
-
- if(found){
-  found.qty++;
- } else {
-  cart.push({
-   name: itemName,
-   price: variant.price,
-   qty:1
-  });
- }
+ cart.push({
+  name: product.name,
+  variant: variant,
+  price: parseInt(price),
+  qty:1
+ });
 
  renderCart();
  showToast("Adăugat în coș");
@@ -409,7 +363,7 @@ function renderCart(){
   html += `
   <div class="item">
    <div>
-    <span>${i.name}</span><br>
+    <span>${i.name} (${i.variant})</span><br>
     <small>${i.price} RON</small>
    </div>
 
@@ -447,9 +401,8 @@ function confirmOrder(){
  let name=document.getElementById("name").value;
  let phone=document.getElementById("phone").value;
  let address=document.getElementById("address").value;
- let time=document.getElementById("time").value;
 
- if(!name||!phone||!address||!time){
+ if(!name||!phone||!address){
   alert("Completează toate câmpurile!");
   return;
  }
@@ -457,10 +410,10 @@ function confirmOrder(){
  let msg="Comanda:%0A";
 
  cart.forEach(i=>{
-  msg+=`${i.name} x${i.qty}%0A`;
+  msg+=`${i.name} (${i.variant}) x${i.qty}%0A`;
  });
 
- msg+=`Nume:${name}%0ATelefon:${phone}%0AAdresa:${address}%0AOra:${time}`;
+ msg+=`Nume:${name}%0ATelefon:${phone}%0AAdresa:${address}`;
 
  window.location.href = "https://wa.me/40769926725?text=" + encodeURIComponent(msg);
 }
