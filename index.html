@@ -23,11 +23,7 @@ body {
 .hero h1 { font-size: 32px; }
 .promo { color: #f5b942; }
 
-.hero h2 {
-  font-size: 24px;
-  margin: 10px 0;
-}
-
+.hero h2 { font-size: 24px; margin: 10px 0; }
 .sub { color: #ccc; }
 
 /* BUTTON */
@@ -39,31 +35,13 @@ button {
   cursor: pointer;
 }
 
-.primary {
-  background: linear-gradient(#ff5a5a, #c0392b);
-  color: white;
-}
-
-.secondary {
-  background: #444;
-  color: white;
-}
+.primary { background: linear-gradient(#ff5a5a, #c0392b); color: white; }
+.secondary { background: #444; color: white; }
 
 /* PRODUCTS */
-.products {
-  padding: 50px 20px;
-}
-
-.products h2 {
-  font-size: 28px;
-}
-
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  margin-top: 30px;
-}
+.products { padding: 50px 20px; background-color: #1c1c1c; }
+.products h2 { font-size: 28px; }
+.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 30px; }
 
 .product {
   background: #1c1c1c;
@@ -73,24 +51,9 @@ button {
   text-align: left;
 }
 
-.product:hover {
-  transform: scale(1.05);
-}
-
-.product img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-.price {
-  color: #f5b942;
-  font-weight: bold;
-}
-
-/* FORM */
-.product form {
-  margin-top: 10px;
-}
+.product:hover { transform: scale(1.05); }
+.product img { width: 100%; border-radius: 10px; }
+.price { color: #f5b942; font-weight: bold; }
 
 .product select {
   width: 100%;
@@ -110,69 +73,61 @@ button {
   text-align: left;
 }
 
-#cos h3 {
+#cos h3 { color: #f5b942; }
+.cos-item { display: flex; justify-content: space-between; align-items: center; margin: 5px 0; }
+.cos-item button { margin-left: 5px; }
+
+.total { font-weight: bold; margin-top: 10px; }
+.livrare-mesaj { color: #f5b942; margin-top: 5px; }
+
+/* Tooltip Livrare suplimentar */
+#livrare-info {
+  margin-top: 5px;
   color: #f5b942;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
 }
 
-.cos-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 5px 0;
+#livrare-info .tooltip-text {
+  visibility: hidden;
+  width: 260px;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; 
+  left: 100%;
+  margin-left: 10px;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.cos-item button {
-  margin-left: 5px;
-}
-
-.total {
-  font-weight: bold;
-  margin-top: 10px;
+#livrare-info:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(0);
 }
 
 /* BENEFITS */
-.benefits {
-  padding: 60px 20px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-}
+.benefits { padding: 60px 20px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
 
 /* TESTIMONIALS */
-.testimonials {
-  padding: 50px 20px;
-  background: #1a1a1a;
-}
-
-.testimonial {
-  max-width: 500px;
-  margin: 20px auto;
-  color: #ccc;
-}
-
-/* CTA */
-.cta {
-  padding: 60px 20px;
-}
-
-.cta button {
-  padding: 15px 40px;
-  font-size: 18px;
-  background: linear-gradient(#ff5a5a, #c0392b);
-}
+.testimonials { padding: 50px 20px; background: #1a1a1a; }
+.testimonial { max-width: 500px; margin: 20px auto; color: #ccc; }
 
 /* SOCIAL */
-.social {
-  padding: 40px;
-}
+.social { padding: 40px; }
+.icons img { width: 50px; margin: 10px; }
 
-.icons img {
-  width: 50px;
-  margin: 10px;
-}
+/* HIGHLIGHT */
+.highlight { animation: highlightAnim 1s ease-in-out; }
+@keyframes highlightAnim { 0% { background-color: #444; } 50% { background-color: #f5b942; } 100% { background-color: #1c1c1c; } }
 </style>
 </head>
 
@@ -181,7 +136,6 @@ button {
 <section class="hero">
   <h1>🍰 Prăjituri de casă</h1>
   <p class="promo">🔥 Reduceri limitate azi | Livrare rapidă în aceeași zi</p>
-
   <h2>Deserturi proaspete, făcute zilnic</h2>
   <p class="sub">Gust autentic, ca la mama acasă ❤️</p>
 
@@ -194,7 +148,6 @@ button {
   <p>Alege desertul preferat și bucură-te de un gust memorabil</p>
 
   <div class="product-grid">
-
     <div class="product">
       <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587">
       <h3>Prăjitură cu ciocolată</h3>
@@ -206,7 +159,6 @@ button {
       </select>
       <button class="primary" onclick="adaugaInCos('Prăjitură cu ciocolată', this.previousElementSibling)">Adaugă în coș</button>
     </div>
-
     <div class="product">
       <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b">
       <h3>Cheesecake fructe</h3>
@@ -218,7 +170,6 @@ button {
       </select>
       <button class="primary" onclick="adaugaInCos('Cheesecake fructe', this.previousElementSibling)">Adaugă în coș</button>
     </div>
-
     <div class="product">
       <img src="https://images.unsplash.com/photo-1606312619070-d48b4c652a52">
       <h3>Tort caramel</h3>
@@ -230,7 +181,6 @@ button {
       </select>
       <button class="primary" onclick="adaugaInCos('Tort caramel', this.previousElementSibling)">Adaugă în coș</button>
     </div>
-
     <div class="product">
       <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729">
       <h3>Prăjitură cu fructe</h3>
@@ -242,21 +192,20 @@ button {
       </select>
       <button class="primary" onclick="adaugaInCos('Prăjitură cu fructe', this.previousElementSibling)">Adaugă în coș</button>
     </div>
-
   </div>
 </section>
 
-<!-- COȘ -->
 <section id="cos">
   <h3>🛒 Coșul tău</h3>
   <div id="cos-items"></div>
   <div class="total" id="total">Total: 0 lei</div>
+  <div class="livrare-mesaj" id="livrare-mesaj">📦 Livrare disponibilă la comenzi peste 200 lei (50-70km) sau peste 350 lei (70-100km)</div>
+  <div id="livrare-info">ℹ️ <span class="tooltip-text">Mai multe detalii despre livrare</span></div>
   <button class="primary" onclick="trimiteComanda()">Comandă acum</button>
 </section>
 
 <section class="benefits">
   <h2>De ce să alegi prăjiturile noastre?</h2>
-
   <div class="grid">
     <div>🌿 100% ingrediente naturale</div>
     <div>🚚 Livrare rapidă</div>
@@ -267,44 +216,24 @@ button {
 
 <section class="testimonials">
   <h2>Ce spun clienții</h2>
-
-  <div class="testimonial">
-    ⭐⭐⭐⭐⭐ „Cele mai bune prăjituri pe care le-am mâncat!”
-  </div>
-
-  <div class="testimonial">
-    ⭐⭐⭐⭐⭐ „Livrare rapidă și gust incredibil!”
-  </div>
-
-  <div class="testimonial">
-    ⭐⭐⭐⭐⭐ „Recomand din suflet!”
-  </div>
+  <div class="testimonial">⭐⭐⭐⭐⭐ „Cele mai bune prăjituri pe care le-am mâncat!”</div>
+  <div class="testimonial">⭐⭐⭐⭐⭐ „Livrare rapidă și gust incredibil!”</div>
+  <div class="testimonial">⭐⭐⭐⭐⭐ „Recomand din suflet!”</div>
 </section>
 
 <section class="social">
   <h3>Urmărește-ne</h3>
-
   <div class="icons">
     <a href="https://www.instagram.com/valentinboboc94/" target="_blank">
       <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram">
     </a>
-
     <a href="https://www.facebook.com/Valentin0894" target="_blank">
       <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
     </a>
   </div>
-
   <div style="margin-top: 20px;">
     <a href="https://wa.me/40769926725" target="_blank">
-      <button style="
-        background: #25D366;
-        color: white;
-        font-size: 16px;
-        padding: 12px 25px;
-        border-radius: 8px;
-        border: none;
-        cursor: pointer;
-      ">
+      <button style="background: #25D366; color: white; font-size: 16px; padding: 12px 25px; border-radius: 8px; border: none; cursor: pointer;">
         📲 Comandă pe WhatsApp
       </button>
     </a>
@@ -312,79 +241,65 @@ button {
 </section>
 
 <script>
-let cos = [];
+let cos=[];
 
-function adaugaInCos(nume, selectMarime, cantitate = 1) {
-  const marime = selectMarime.value;
-  const pret = parseInt(selectMarime.selectedOptions[0].dataset.pret);
-
-  const index = cos.findIndex(item => item.nume === nume && item.marime === marime);
-  if(index !== -1){
-    cos[index].cantitate += cantitate;
-  } else {
-    cos.push({nume, marime, pret, cantitate});
-  }
+function adaugaInCos(nume, selectMarime, cantitate=1){
+  const marime=selectMarime.value;
+  const pret=parseInt(selectMarime.selectedOptions[0].dataset.pret);
+  const index=cos.findIndex(item=>item.nume===nume && item.marime===marime);
+  if(index!==-1) cos[index].cantitate+=cantitate;
+  else cos.push({nume,marime,pret,cantitate});
   afiseazaCos();
 }
 
-function afiseazaCos() {
-  const container = document.getElementById('cos-items');
-  container.innerHTML = '';
-  let total = 0;
-  cos.forEach((item, index) => {
-    const div = document.createElement('div');
-    div.className = 'cos-item';
-    div.innerHTML = `
-      ${item.nume} (${item.marime}) - ${item.pret * item.cantitate} lei
-      <button onclick="modificaCantitate(${index}, -1)">➖</button>
-      ${item.cantitate}
-      <button onclick="modificaCantitate(${index}, 1)">➕</button>
-      <button onclick="stergeDinCos(${index})">❌</button>
-    `;
+function afiseazaCos(){
+  const container=document.getElementById('cos-items');
+  container.innerHTML='';
+  let total=0;
+  cos.forEach((item,index)=>{
+    const div=document.createElement('div');
+    div.className='cos-item';
+    div.innerHTML=`${item.nume} (${item.marime}) - ${item.pret*item.cantitate} lei 
+      <button onclick="modificaCantitate(${index},-1)">➖</button>${item.cantitate}
+      <button onclick="modificaCantitate(${index},1)">➕</button>
+      <button onclick="stergeDinCos(${index})">❌</button>`;
     container.appendChild(div);
-    total += item.pret * item.cantitate;
+    total+=item.pret*item.cantitate;
   });
-  document.getElementById('total').innerText = `Total: ${total} lei`;
+  document.getElementById('total').innerText=`Total: ${total} lei`;
+
+  const livrareMsg=document.getElementById('livrare-mesaj');
+  if(total>350) livrareMsg.innerText=`La comenzi de peste 350 lei livrare pe o rază de 70-100km`;
+  else if(total>200) livrareMsg.innerText=`La comenzi de peste 200 lei livrare pe o rază de 50-70km`;
+  else livrareMsg.innerText=`Livrare indisponibilă sub 200 lei`;
 }
 
-function modificaCantitate(index, valoare) {
-  cos[index].cantitate += valoare;
-  if(cos[index].cantitate <= 0) cos.splice(index,1);
-  afiseazaCos();
+function modificaCantitate(index,val){ cos[index].cantitate+=val; if(cos[index].cantitate<=0) cos.splice(index,1); afiseazaCos(); }
+function stergeDinCos(index){ cos.splice(index,1); afiseazaCos(); }
+
+function trimiteComanda(){
+  if(cos.length===0){ alert('Coșul este gol!'); return; }
+  let mesaj='✅ Comandă de pe site:%0A';
+  let total=0;
+  cos.forEach(item=>{ mesaj+=`- ${item.nume} (${item.marime}) x${item.cantitate} - ${item.pret*item.cantitate} lei%0A`; total+=item.pret*item.cantitate; });
+  mesaj+=`%0ATotal: ${total} lei`;
+  window.open(`https://wa.me/40769926725?text=${mesaj}`,'_blank');
 }
 
-function stergeDinCos(index) {
-  cos.splice(index,1);
-  afiseazaCos();
-}
-
-function trimiteComanda() {
-  if(cos.length === 0) {
-    alert('Coșul este gol!');
-    return;
-  }
-  let mesaj = '✅ Comandă de pe site:%0A';
-  let total = 0;
-  cos.forEach(item => {
-    mesaj += `- ${item.nume} (${item.marime}) x${item.cantitate} - ${item.pret * item.cantitate} lei%0A`;
-    total += item.pret * item.cantitate;
-  });
-  mesaj += `%0ATotal: ${total} lei`;
-  const numar = '40769926725';
-  window.open(`https://wa.me/${numar}?text=${mesaj}`, '_blank');
-}
-
-// Buton Comandă acum din hero
-document.querySelector('.hero .primary').addEventListener('click', () => {
-  const primulProdus = document.querySelector('.product-grid .product');
-  const selectMarime = primulProdus.querySelector('select');
-  adaugaInCos(primulProdus.querySelector('h3').innerText, selectMarime, 1);
-  document.getElementById('cos').scrollIntoView({behavior: 'smooth'});
+// Hero "Comandă acum"
+document.querySelector('.hero .primary').addEventListener('click',()=>{
+  const primulProdus=document.querySelector('.product-grid .product');
+  const selectMarime=primulProdus.querySelector('select');
+  adaugaInCos(primulProdus.querySelector('h3').innerText,selectMarime,1);
+  document.getElementById('cos').scrollIntoView({behavior:'smooth'});
 });
 
-// Buton Vezi produse
-document.getElementById('vezi-produse').addEventListener('click', () => {
-  document.querySelector('.products').scrollIntoView({ behavior: 'smooth' });
+// Vezi produse scroll
+document.getElementById('vezi-produse').addEventListener('click',()=>{
+  const sectiune=document.querySelector('.products');
+  sectiune.scrollIntoView({behavior:'smooth'});
+  sectiune.classList.add('highlight');
+  setTimeout(()=>{ sectiune.classList.remove('highlight'); },1000);
 });
 </script>
 
