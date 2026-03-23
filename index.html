@@ -9,178 +9,159 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
 body{background:#f4f6f9}
 
-/* HEADER */
 header{
-  background:#111;
-  color:#fff;
-  padding:15px;
-  text-align:center;
+ background:#111;
+ color:#fff;
+ padding:15px;
+ text-align:center;
 }
 
-/* HERO */
 .hero{
-  text-align:center;
-  padding:25px;
+ text-align:center;
+ padding:25px;
 }
 .hero h2{font-size:26px;margin-bottom:10px;}
 .hero p{color:#555}
 .hero .cta{
-  margin-top:10px;
-  font-weight:bold;
-  color:#111;
+ margin-top:10px;
+ font-weight:bold;
+ color:#111;
 }
 
-/* PROMO BANNER */
 .promo{
-  background:#111;
-  color:#fff;
-  text-align:center;
-  padding:10px;
-  font-size:14px;
+ background:#111;
+ color:#fff;
+ text-align:center;
+ padding:10px;
+ font-size:14px;
 }
 
-/* GRID */
 .container{padding:20px;}
-
 .grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:20px;
 }
 
-/* CARD */
 .card{
-  background:#fff;
-  border-radius:12px;
-  overflow:hidden;
-  position:relative;
-  box-shadow:0 4px 15px rgba(0,0,0,0.1);
+ background:#fff;
+ border-radius:12px;
+ overflow:hidden;
+ position:relative;
+ box-shadow:0 4px 15px rgba(0,0,0,0.1);
 }
-
 .card img{
-  width:100%;
-  height:180px;
-  object-fit:cover;
+ width:100%;
+ height:180px;
+ object-fit:cover;
 }
-
 .card-content{padding:10px;}
 
 .badge{
-  position:absolute;
-  top:10px;
-  left:10px;
-  background:red;
-  color:#fff;
-  padding:5px 8px;
-  font-size:12px;
-  border-radius:5px;
+ position:absolute;
+ top:10px;
+ left:10px;
+ background:red;
+ color:#fff;
+ padding:5px 8px;
+ font-size:12px;
+ border-radius:5px;
 }
 
 .card .tag{
-  font-size:12px;
-  color:#e67e22;
-  margin:5px 0;
+ font-size:12px;
+ color:#e67e22;
+ margin:5px 0;
 }
 
 .card button{
-  width:100%;
-  padding:10px;
-  border:none;
-  background:#111;
-  color:#fff;
-  cursor:pointer;
+ width:100%;
+ padding:10px;
+ border:none;
+ background:#111;
+ color:#fff;
+ cursor:pointer;
 }
 
-/* SLIDER */
 .slider{
-  margin:30px 0;
-  overflow:hidden;
-  border-radius:12px;
+ margin:30px 0;
+ overflow:hidden;
+ border-radius:12px;
 }
 .slides{
-  display:flex;
-  transition:0.5s;
+ display:flex;
+ transition:0.5s;
 }
 .slides img{width:100%;}
 
-/* REVIEWS */
-.reviews{
-  margin-top:30px;
-}
+.reviews{margin-top:30px;}
 .review{
-  background:#fff;
-  padding:12px;
-  margin-bottom:10px;
-  border-radius:10px;
+ background:#fff;
+ padding:12px;
+ margin-bottom:10px;
+ border-radius:10px;
 }
 
-/* CART */
 .cart{
-  position:sticky;
-  bottom:0;
-  background:#fff;
-  padding:15px;
+ position:sticky;
+ bottom:0;
+ background:#fff;
+ padding:15px;
 }
 
 .item{
-  display:flex;
-  justify-content:space-between;
-  padding:6px 0;
-  border-bottom:1px solid #eee;
+ display:flex;
+ justify-content:space-between;
+ padding:6px 0;
+ border-bottom:1px solid #eee;
 }
 
-/* BUTTONS */
 .actions{
-  display:flex;
-  gap:10px;
-  margin-top:10px;
+ display:flex;
+ gap:10px;
+ margin-top:10px;
 }
 
 .btn{
-  flex:1;
-  padding:10px;
-  border:none;
-  color:#fff;
-  cursor:pointer;
+ flex:1;
+ padding:10px;
+ border:none;
+ color:#fff;
+ cursor:pointer;
 }
 
 .buy{background:#25D366;}
 .cancel{background:#e74c3c;}
 
-/* CHECKOUT */
 .checkout{
-  background:#fff;
-  padding:15px;
-  margin-top:20px;
-  border-radius:10px;
+ background:#fff;
+ padding:15px;
+ margin-top:20px;
+ border-radius:10px;
 }
+
 .checkout input{
-  width:100%;
-  margin:5px 0;
-  padding:8px;
+ width:100%;
+ margin:5px 0;
+ padding:8px;
 }
 
-/* FOOTER */
 footer{
-  background:#000;
-  color:#fff;
-  text-align:center;
-  padding:20px;
-  margin-top:40px;
-}
-
-footer p{
-  margin-bottom:5px;
+ background:#000;
+ color:#fff;
+ text-align:center;
+ padding:20px;
+ margin-top:40px;
 }
 
 .toast{
-  position:fixed;
-  top:20px;
-  right:20px;
-  background:#111;
-  color:#fff;
-  padding:10px;
-  display:none;
+ position:fixed;
+ top:20px;
+ right:20px;
+ background:#111;
+ color:#fff;
+ padding:10px;
+ display:none;
 }
 </style>
 </head>
@@ -191,7 +172,6 @@ footer p{
 <h1>Prajituri de casa</h1>
 </header>
 
-<!-- PROMO BAR -->
 <div class="promo">
 🔥 Reduceri limitate azi | Comandă acum și primești livrare rapidă
 </div>
@@ -203,19 +183,18 @@ footer p{
 </div>
 
 <div class="container">
-
 <div class="grid" id="products"></div>
 
-<!-- SLIDER -->
 <div class="slider">
 <div class="slides" id="slides">
 <img src="https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg">
-<img src="https://media.istockphoto.com/id/2152360017/ro/fotografie/cheesecake-c%C4%83p%C8%99uni.jpg">
+<img src="https://i.pinimg.com/736x/9f/f7/51/9ff7519385d770103d8b4bf6c53c7a37.jpg">
 <img src="https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg">
+<img src="https://i.pinimg.com/736x/36/8f/bd/368fbde717331b559db8af6df7aef957.jpg">
+<img src="https://i.pinimg.com/736x/ad/14/a2/ad14a286c8e61dc38c96e0500f6a93de.jpg">
 </div>
 </div>
 
-<!-- REVIEWS -->
 <div class="reviews">
 <h3>⭐ Recenzii clienți</h3>
 <div class="review">„Cele mai bune prăjituri din zonă!” – Maria</div>
@@ -225,18 +204,15 @@ footer p{
 
 </div>
 
-<!-- CART -->
 <div class="cart">
 <h3>Coș</h3>
 <div id="cart"></div>
-
 <div class="actions">
 <button class="btn buy" onclick="openCheckout()">Comandă acum</button>
 <button class="btn cancel" onclick="clearCart()">Anulează</button>
 </div>
 </div>
 
-<!-- CHECKOUT -->
 <div class="checkout" id="checkout" style="display:none;">
 <h3>Finalizează comanda</h3>
 <input id="name" placeholder="Nume complet">
@@ -250,12 +226,11 @@ footer p{
 
 <footer>
 <p>© 2026 Prajituri de casa</p>
-<p>Contact rapid & comenzi online disponibile zilnic</p>
 <p>📱 Facebook | Instagram</p>
 </footer>
 
 <script>
-const products=[
+const products = [
 {name:"Tort ciocolata",price:120,img:"https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg",badge:"Best Seller",tag:"⭐ Cel mai vândut"},
 {name:"Cheesecake",price:100,img:"https://i.pinimg.com/webp/1200x/1e/92/70/1e92708d4c30a0c225cd6e2a8d6aac8b.webp",tag:"🔥 Ofertă limitată"},
 {name:"Amandina",price:90,img:"https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg"},
@@ -263,79 +238,95 @@ const products=[
 {name:"Tiramisu",price:110,img:"https://i.pinimg.com/webp/736x/0e/c2/89/0ec289492947872976c5c52215280faa.webp"}
 ];
 
-let cart=[];
+let cart = [];
 
-const productsDiv=document.getElementById("products");
+const productsDiv = document.getElementById("products");
 
 products.forEach((p,i)=>{
-const div=document.createElement("div");
-div.className="card";
-div.innerHTML=`
-${p.badge?`<div class="badge">${p.badge}</div>`:''}
-<img src="${p.img}">
-<div class="card-content">
-<h3>${p.name}</h3>
-<p>${p.price} RON</p>
-<p class="tag">${p.tag||''}</p>
-<button onclick="addToCart(${i})">Adaugă în coș</button>
-</div>`;
-productsDiv.appendChild(div);
+ const div = document.createElement("div");
+ div.className="card";
+
+ div.innerHTML = `
+ ${p.badge ? `<div class="badge">${p.badge}</div>` : ''}
+ <img src="${p.img}">
+ <div class="card-content">
+  <h3>${p.name}</h3>
+  <p class="tag">${p.tag || ''}</p>
+  <p><strong>${p.price} RON</strong></p>
+  <button onclick="addToCart(${i})">Adaugă în coș</button>
+ </div>
+ `;
+ productsDiv.appendChild(div);
 });
 
 function addToCart(i){
-let item=products[i];
-let found=cart.find(x=>x.name===item.name);
-if(found) found.qty++;
-else cart.push({...item,qty:1});
-renderCart();
-showToast("Adăugat în coș");
+ let product = products[i];
+
+ let found = cart.find(x => x.name === product.name);
+
+ if(found){
+  found.qty++;
+ } else {
+  cart.push({
+   name: product.name,
+   price: product.price,
+   qty:1
+  });
+ }
+
+ renderCart();
+ showToast("Adăugat în coș");
 }
 
 function renderCart(){
-let html="";
-cart.forEach(i=>{
-html+=`<div class="item">
-<span>${i.name} x${i.qty}</span>
-<span>${i.price*i.qty} RON</span>
-</div>`;
-});
-document.getElementById("cart").innerHTML=html;
+ let html="";
+ cart.forEach(i=>{
+  html += `
+  <div class="item">
+   <span>${i.name} x${i.qty}</span>
+   <span>${i.price * i.qty} RON</span>
+  </div>
+  `;
+ });
+ document.getElementById("cart").innerHTML = html;
 }
 
 function clearCart(){
-cart=[];
-renderCart();
+ cart=[];
+ renderCart();
 }
 
 function openCheckout(){
-document.getElementById("checkout").style.display="block";
+ document.getElementById("checkout").style.display="block";
 }
 
 function confirmOrder(){
-let name=document.getElementById("name").value;
-let phone=document.getElementById("phone").value;
-let address=document.getElementById("address").value;
-let time=document.getElementById("time").value;
+ let name=document.getElementById("name").value;
+ let phone=document.getElementById("phone").value;
+ let address=document.getElementById("address").value;
+ let time=document.getElementById("time").value;
 
-if(!name||!phone||!address||!time){
-alert("Completează toate câmpurile!");
-return;
-}
+ if(!name||!phone||!address||!time){
+  alert("Completează toate câmpurile!");
+  return;
+ }
 
-let msg="Comanda:%0A";
-cart.forEach(i=>{
-msg+=`${i.name} x${i.qty}%0A`;
-});
-msg+=`Nume:${name}%0ATelefon:${phone}%0AAdresa:${address}%0AOra:${time}`;
+ let msg="Comanda:%0A";
 
-window.open("https://wa.me/40769926725?text="+msg);
+ cart.forEach(i=>{
+  msg+=`${i.name} x${i.qty}%0A`;
+ });
+
+ msg+=`Nume:${name}%0ATelefon:${phone}%0AAdresa:${address}%0AOra:${time}`;
+
+ window.open("https://wa.me/40769926725?text="+msg);
 }
 
 function showToast(msg){
-let t=document.getElementById("toast");
-t.innerText=msg;
-t.style.display="block";
-setTimeout(()=>t.style.display="none",2000);
+ let t=document.getElementById("toast");
+ t.innerText=msg;
+ t.style.display="block";
+ setTimeout(()=>t.style.display="none",2000);
 }
 
 /* SLIDER */
@@ -343,11 +334,10 @@ let index=0;
 const slides=document.getElementById("slides");
 
 setInterval(()=>{
-index++;
-if(index>=slides.children.length) index=0;
-slides.style.transform=`translateX(-${index*100}%)`;
+ index++;
+ if(index>=slides.children.length) index=0;
+ slides.style.transform=`translateX(-${index*100}%)`;
 },3000);
-
 </script>
 
 </body>
