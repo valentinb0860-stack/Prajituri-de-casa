@@ -117,7 +117,12 @@ button {
 .cos-item {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 5px 0;
+}
+
+.cos-item button {
+  margin-left: 5px;
 }
 
 .total {
@@ -181,7 +186,7 @@ button {
   <p class="sub">Gust autentic, ca la mama acasă ❤️</p>
 
   <button class="primary">Comandă acum</button>
-  <button class="secondary">Vezi produse</button>
+  <button class="secondary" id="vezi-produse">Vezi produse</button>
 </section>
 
 <section class="products">
@@ -309,10 +314,16 @@ button {
 <script>
 let cos = [];
 
-function adaugaInCos(nume, selectMarime) {
+function adaugaInCos(nume, selectMarime, cantitate = 1) {
   const marime = selectMarime.value;
   const pret = parseInt(selectMarime.selectedOptions[0].dataset.pret);
-  cos.push({nume, marime, pret});
+
+  const index = cos.findIndex(item => item.nume === nume && item.marime === marime);
+  if(index !== -1){
+    cos[index].cantitate += cantitate;
+  } else {
+    cos.push({nume, marime, pret, cantitate});
+  }
   afiseazaCos();
 }
 
@@ -323,11 +334,23 @@ function afiseazaCos() {
   cos.forEach((item, index) => {
     const div = document.createElement('div');
     div.className = 'cos-item';
-    div.innerHTML = `${item.nume} (${item.marime}) - ${item.pret} lei <button onclick="stergeDinCos(${index})">❌</button>`;
+    div.innerHTML = `
+      ${item.nume} (${item.marime}) - ${item.pret * item.cantitate} lei
+      <button onclick="modificaCantitate(${index}, -1)">➖</button>
+      ${item.cantitate}
+      <button onclick="modificaCantitate(${index}, 1)">➕</button>
+      <button onclick="stergeDinCos(${index})">❌</button>
+    `;
     container.appendChild(div);
-    total += item.pret;
+    total += item.pret * item.cantitate;
   });
   document.getElementById('total').innerText = `Total: ${total} lei`;
+}
+
+function modificaCantitate(index, valoare) {
+  cos[index].cantitate += valoare;
+  if(cos[index].cantitate <= 0) cos.splice(index,1);
+  afiseazaCos();
 }
 
 function stergeDinCos(index) {
@@ -343,13 +366,26 @@ function trimiteComanda() {
   let mesaj = '✅ Comandă de pe site:%0A';
   let total = 0;
   cos.forEach(item => {
-    mesaj += `- ${item.nume} (${item.marime}) - ${item.pret} lei%0A`;
-    total += item.pret;
+    mesaj += `- ${item.nume} (${item.marime}) x${item.cantitate} - ${item.pret * item.cantitate} lei%0A`;
+    total += item.pret * item.cantitate;
   });
   mesaj += `%0ATotal: ${total} lei`;
   const numar = '40769926725';
   window.open(`https://wa.me/${numar}?text=${mesaj}`, '_blank');
 }
+
+// Buton Comandă acum din hero
+document.querySelector('.hero .primary').addEventListener('click', () => {
+  const primulProdus = document.querySelector('.product-grid .product');
+  const selectMarime = primulProdus.querySelector('select');
+  adaugaInCos(primulProdus.querySelector('h3').innerText, selectMarime, 1);
+  document.getElementById('cos').scrollIntoView({behavior: 'smooth'});
+});
+
+// Buton Vezi produse
+document.getElementById('vezi-produse').addEventListener('click', () => {
+  document.querySelector('.products').scrollIntoView({ behavior: 'smooth' });
+});
 </script>
 
 </body>
