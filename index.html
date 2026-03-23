@@ -74,6 +74,12 @@ header{
  margin:5px 0;
 }
 
+.card select{
+ width:100%;
+ padding:8px;
+ margin:5px 0;
+}
+
 .card button{
  width:100%;
  padding:10px;
@@ -112,8 +118,18 @@ header{
 .item{
  display:flex;
  justify-content:space-between;
+ align-items:center;
  padding:6px 0;
  border-bottom:1px solid #eee;
+}
+
+.qty-controls button{
+ padding:4px 8px;
+ margin:0 3px;
+ border:none;
+ background:#111;
+ color:#fff;
+ cursor:pointer;
 }
 
 .actions{
@@ -231,11 +247,54 @@ footer{
 
 <script>
 const products = [
-{name:"Tort ciocolata",price:120,img:"https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg",badge:"Best Seller",tag:"⭐ Cel mai vândut"},
-{name:"Cheesecake",price:100,img:"https://i.pinimg.com/webp/1200x/1e/92/70/1e92708d4c30a0c225cd6e2a8d6aac8b.webp",tag:"🔥 Ofertă limitată"},
-{name:"Amandina",price:90,img:"https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg"},
-{name:"Ecler",price:70,img:"https://i.pinimg.com/736x/61/84/2b/61842b9b77c0b03ee364aa95482b369d.jpg"},
-{name:"Tiramisu",price:110,img:"https://i.pinimg.com/webp/736x/0e/c2/89/0ec289492947872976c5c52215280faa.webp"}
+{
+ name:"Tort ciocolata",
+ img:"https://i.pinimg.com/736x/3e/94/67/3e9467c0d78cba9242a1ca359f2aa8db.jpg",
+ badge:"Best Seller",
+ tag:"⭐ Cel mai vândut",
+ variants:[
+  {name:"Mic", price:100},
+  {name:"Mediu", price:120},
+  {name:"Mare", price:150}
+ ]
+},
+{
+ name:"Cheesecake",
+ img:"https://i.pinimg.com/webp/1200x/1e/92/70/1e92708d4c30a0c225cd6e2a8d6aac8b.webp",
+ tag:"🔥 Ofertă limitată",
+ variants:[
+  {name:"Mic", price:80},
+  {name:"Mediu", price:100},
+  {name:"Mare", price:130}
+ ]
+},
+{
+ name:"Amandina",
+ img:"https://i.pinimg.com/736x/ab/85/e5/ab85e5aa4e5c4a3df58adc5ffe61a2e3.jpg",
+ variants:[
+  {name:"Mic", price:70},
+  {name:"Mediu", price:90},
+  {name:"Mare", price:110}
+ ]
+},
+{
+ name:"Ecler",
+ img:"https://i.pinimg.com/736x/61/84/2b/61842b9b77c0b03ee364aa95482b369d.jpg",
+ variants:[
+  {name:"Mic", price:50},
+  {name:"Mediu", price:70},
+  {name:"Mare", price:90}
+ ]
+},
+{
+ name:"Tiramisu",
+ img:"https://i.pinimg.com/webp/736x/0e/c2/89/0ec289492947872976c5c52215280faa.webp",
+ variants:[
+  {name:"Mic", price:90},
+  {name:"Mediu", price:110},
+  {name:"Mare", price:140}
+ ]
+}
 ];
 
 let cart = [];
@@ -246,13 +305,21 @@ products.forEach((p,i)=>{
  const div = document.createElement("div");
  div.className="card";
 
+ let variantOptions = p.variants.map((v,idx)=>
+  `<option value="${idx}">${v.name} - ${v.price} RON</option>`
+ ).join("");
+
  div.innerHTML = `
  ${p.badge ? `<div class="badge">${p.badge}</div>` : ''}
  <img src="${p.img}">
  <div class="card-content">
   <h3>${p.name}</h3>
   <p class="tag">${p.tag || ''}</p>
-  <p><strong>${p.price} RON</strong></p>
+
+  <select id="variant-${i}">
+   ${variantOptions}
+  </select>
+
   <button onclick="addToCart(${i})">Adaugă în coș</button>
  </div>
  `;
@@ -261,15 +328,19 @@ products.forEach((p,i)=>{
 
 function addToCart(i){
  let product = products[i];
+ let variantIndex = document.getElementById(`variant-${i}`).value;
+ let variant = product.variants[variantIndex];
 
- let found = cart.find(x => x.name === product.name);
+ let itemName = product.name + " (" + variant.name + ")";
+
+ let found = cart.find(x => x.name === itemName);
 
  if(found){
   found.qty++;
  } else {
   cart.push({
-   name: product.name,
-   price: product.price,
+   name: itemName,
+   price: variant.price,
    qty:1
   });
  }
@@ -280,15 +351,33 @@ function addToCart(i){
 
 function renderCart(){
  let html="";
- cart.forEach(i=>{
+ cart.forEach((i,index)=>{
   html += `
   <div class="item">
-   <span>${i.name} x${i.qty}</span>
+   <div>
+    <span>${i.name}</span><br>
+    <small>${i.price} RON</small>
+   </div>
+
+   <div class="qty-controls">
+    <button onclick="changeQty(${index}, -1)">-</button>
+    <span>${i.qty}</span>
+    <button onclick="changeQty(${index}, 1)">+</button>
+   </div>
+
    <span>${i.price * i.qty} RON</span>
   </div>
   `;
  });
  document.getElementById("cart").innerHTML = html;
+}
+
+function changeQty(index, delta){
+ cart[index].qty += delta;
+ if(cart[index].qty <= 0){
+  cart.splice(index,1);
+ }
+ renderCart();
 }
 
 function clearCart(){
